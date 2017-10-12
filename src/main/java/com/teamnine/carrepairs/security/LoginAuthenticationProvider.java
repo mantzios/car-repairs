@@ -1,6 +1,6 @@
 package com.teamnine.carrepairs.security;
 
-
+import com.teamnine.carrepairs.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,20 +16,12 @@ import java.util.Set;
 @Component
 public class LoginAuthenticationProvider implements AuthenticationProvider {
 
-
+    @Autowired
+    private AccountService accountService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        /*
-        String username = authentication.getName();
-        String password = (String) authentication.getCredentials();
 
-        accountService.login(username, password);
-        return new UsernamePasswordAuthenticationToken(username, password);
-        */
-
-        //Owner owner = ownerRepository.findByEmail(email);
-        // accountService.login("a","a");
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         String email="apo.mantzios";
         grantedAuthorities.add(new SimpleGrantedAuthority("USER"));

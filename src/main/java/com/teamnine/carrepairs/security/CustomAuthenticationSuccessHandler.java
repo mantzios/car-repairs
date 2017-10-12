@@ -19,7 +19,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-        //GrantedAuthority grantedAuthority=(GrantedAuthority) authentication.getAuthorities();
 
         Collection<? extends GrantedAuthority> authorities= authentication.getAuthorities();
         authentication.getAuthorities();
@@ -29,7 +28,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             if (grantedAuthority.getAuthority().equals("ADMIN")) {
                 redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "admin/search");
             }else{
-                redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/register");
+                redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/home");
             }
         }
     }

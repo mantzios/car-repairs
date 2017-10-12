@@ -26,7 +26,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             System.out.println(grantedAuthority.getAuthority());
 
             if (grantedAuthority.getAuthority().equals("ADMIN")) {
-                redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "admin/search");
+                redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "admin/owners");
             }else{
                 redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/home");
             }

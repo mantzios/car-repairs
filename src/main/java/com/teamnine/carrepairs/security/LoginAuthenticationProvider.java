@@ -1,5 +1,7 @@
 package com.teamnine.carrepairs.security;
 
+import com.teamnine.carrepairs.domain.User;
+import com.teamnine.carrepairs.repository.UserRepository;
 import com.teamnine.carrepairs.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -19,14 +21,17 @@ public class LoginAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private AccountService accountService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        String email="apo.mantzios";
-        grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
-        //here we call the service for checking the role and the type of the user
-        return new UsernamePasswordAuthenticationToken(email,"fdfd",grantedAuthorities);
+        System.out.println(authentication.getName());
+        User user=userRepository.findByEmail(authentication.getName());
+        grantedAuthorities.add(new SimpleGrantedAuthority(user.getAccess()));
+        return new UsernamePasswordAuthenticationToken(user.getEmail(),"fdfd",grantedAuthorities);
 
     }
 

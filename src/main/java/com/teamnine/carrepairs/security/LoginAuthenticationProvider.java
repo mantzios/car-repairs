@@ -21,18 +21,14 @@ public class LoginAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private AccountService accountService;
 
-    @Autowired
-    private UserRepository userRepository;
+
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-        System.out.println(authentication.getName());
-        Owner user=userRepository.findByEmail(authentication.getName());
+        Owner user=accountService.login(authentication.getName(),authentication.getCredentials().toString());
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getAccess()));
-        return new UsernamePasswordAuthenticationToken(user.getEmail(),"fdfd",grantedAuthorities);
-
+        return new UsernamePasswordAuthenticationToken(user.getEmail(),user.getPassword(),grantedAuthorities);
     }
 
     @Override

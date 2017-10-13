@@ -1,1 +1,2 @@
-INSERT into users(email,password,access) VALUES ("apo.mantzios@gmail.com","12345","ADMIN");
+INSERT into owners(afm_number,email,password,access) VALUES ("748578235","apo.mantzios@gmail.com","12345","ADMIN");
+INSERT into owners(access, afm_number, email, lastname, name, password) VALUES ("USER",19298491,"aggeliki@gmail.com","agg","agg","1244");

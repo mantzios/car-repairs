@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class OwnersController {
-    @RequestMapping(value= "/owners", method = RequestMethod.GET)
+    @RequestMapping(value= "/admin/owners", method = RequestMethod.GET)
     public String owners(Model model) {
 
         return "owners";

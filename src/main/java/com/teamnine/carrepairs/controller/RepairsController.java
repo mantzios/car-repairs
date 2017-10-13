@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class RepairsController {
-    @RequestMapping(value= "/repairs", method = RequestMethod.GET)
+    @RequestMapping(value= "admin/repairs", method = RequestMethod.GET)
     public String repairs(Model model){
 
         return "repairs";

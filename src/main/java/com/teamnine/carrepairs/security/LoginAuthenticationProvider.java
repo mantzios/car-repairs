@@ -1,6 +1,6 @@
 package com.teamnine.carrepairs.security;
 
-import com.teamnine.carrepairs.domain.User;
+import com.teamnine.carrepairs.domain.Owner;
 import com.teamnine.carrepairs.repository.UserRepository;
 import com.teamnine.carrepairs.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class LoginAuthenticationProvider implements AuthenticationProvider {
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
         System.out.println(authentication.getName());
-        User user=userRepository.findByEmail(authentication.getName());
+        Owner user=userRepository.findByEmail(authentication.getName());
         grantedAuthorities.add(new SimpleGrantedAuthority(user.getAccess()));
         return new UsernamePasswordAuthenticationToken(user.getEmail(),"fdfd",grantedAuthorities);
 

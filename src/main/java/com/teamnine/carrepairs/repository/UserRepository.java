@@ -1,17 +1,14 @@
 package com.teamnine.carrepairs.repository;
 
-import com.teamnine.carrepairs.domain.User;
-import org.springframework.data.jpa.repository.Query;
+import com.teamnine.carrepairs.domain.Owner;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 
-public interface UserRepository extends CrudRepository<User,Long> {
+public interface UserRepository extends CrudRepository<Owner,Long> {
 
 
-    User findByEmail(String email);
+    Owner findByEmail(String email);
 
-    @Override
-    void delete(User user);
+
 
 
 }

@@ -19,7 +19,7 @@ public class Vehicle {
     @Column
     private String model;
 
-    @Column
+    @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date year;
 
     @Column

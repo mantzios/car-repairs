@@ -1,7 +1,8 @@
 package com.teamnine.carrepairs.service;
 
+import com.teamnine.carrepairs.domain.Owner;
 import org.springframework.security.core.AuthenticationException;
 
 public interface AccountService {
-    void login(String username, String password) throws AuthenticationException;
+    Owner login(String username, String password) throws AuthenticationException;
 }

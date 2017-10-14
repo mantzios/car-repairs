@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface UserRepository extends CrudRepository<Owner,Long> {
 
 
-    Owner findByEmail(String email);
+    Owner findByEmailAndPassword(String email,String password);
 
 
 

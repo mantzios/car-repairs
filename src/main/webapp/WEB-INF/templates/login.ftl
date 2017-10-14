@@ -26,12 +26,14 @@
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                 </div>
 
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"> Remember me
-                    </label>
-                </div>
                 <button type="submit" class="btn btn-default">Submit</button>
+                <#if error_message??>
+                    <div class="alert alert-danger alert-dismissable fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        ${error_message!""}
+                    </div>
+                </#if>
+
                 </form>
             </div>
         </div>

@@ -12,7 +12,7 @@ public class Repair {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false,columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date datetime;
 
     @Column(nullable = false)

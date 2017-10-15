@@ -1,11 +1,13 @@
 package com.teamnine.carrepairs.model;
 
+import com.teamnine.carrepairs.domain.Repair;
+
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 
 public class CreateRepairForm {
 
-    private Date datetime;
+    private String datetime;
 
     private String status;
 
@@ -15,11 +17,16 @@ public class CreateRepairForm {
 
     private String textarea;
 
-    public Date getDatetime() {
+    public CreateRepairForm() {
+    }
+
+
+
+    public String getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(Date datetime) {
+    public void setDatetime(String datetime) {
         this.datetime = datetime;
     }
 

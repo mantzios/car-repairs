@@ -12,7 +12,7 @@ public class Repair {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false,columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(nullable = false)
     private Date datetime;
 
     @Column(nullable = false)
@@ -28,12 +28,12 @@ public class Repair {
     private String textarea;
 
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "vehicle_id",referencedColumnName = "vehicle_id")
     private Vehicle vehicle;
 
 
-    @ManyToOne()
+    @ManyToOne(optional = true)
     @JoinColumn(name = "Owner_id", referencedColumnName = "Owner_id")
     private Owner owner;
 

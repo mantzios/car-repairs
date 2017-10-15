@@ -1,42 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
 <@layout flag="home" >
+<div class="container">
+
+<button type="button" style="margin:10px"  class="btn btn-warning pull-right" id="createBtn" onClick="location.href='/admin/repairs'" >Add New Repair</button>
+
+
 <table class="table table-hover">
-  <thead>
+    <thead>
     <tr>
-      <th>#</th>
-      <th>Time</th>
-      <th>Type</th>
-      <th>Status</th>
-      <th>Cost</th>
-      <th>Description</th>
+        <th>#</th>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Status</th>
+        <th>Cost</th>
+        <th>Description</th>
+        <th>edit</th>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
+       <#list repairs as item>
+       <tr>
+           <th scope="row">${item?counter}</th>
+           <td>${item.datetime}</td>
+           <td>${item.type}</td>
+           <td>${item.status}</td>
+           <td>${item.cost}</td>
+           <td>${item.textarea}</td>
+           <td><a href="/admin/edit/repair?id=${item.id}"><image src="/edit.png" class=" "/></a></td>
 
-    <tr>
-      <th scope="row">1</th>
-      <td>${name}</td>
-      <td></td>
-      <td></td>
-       <td></td>
-       <td></td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-       <td></td>
-       <td></td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
+       </tr>
+       </#list>
+
+    </tbody>
 </table>
-
+</div>
 </@layout>
+</body>
+</html>

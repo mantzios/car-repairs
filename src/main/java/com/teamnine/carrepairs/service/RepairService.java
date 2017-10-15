@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface RepairService {
     List<Repair> findAllRepairs();
+    long save(Repair repair);
+    Repair findById(Long id);
+
 }

@@ -19,10 +19,10 @@
 
     <h3 style="color: green; font-weight: bold; font-size: 20px;">${message!""}</h3>
 
-        <form class="well form-horizontal" action="/admin/repairs" method="post" id="createRepairForm" name="createRepairForm">
+        <form class="well form-horizontal" action="/admin/repairs" method="post" id="editRepairForm" name="editRepairForm">
 
             <div class="form-group">
-                <@spring.bind "createRepairForm.datetime"/>
+                <@spring.bind "editRepairForm.datetime"/>
                 <label class="control-label col-md-4 requiredField" for="date">Date</label>
 
                 <div class="col-md-4">
@@ -41,15 +41,16 @@
 
 
             <div class="form-group">
-                <@spring.bind "createRepairForm.status"/>
+                <@spring.bind "editRepairForm.status"/>
                 <label class="col-md-4 control-label">Status</label>
                 <div class="col-md-4 selectContainer">
                     <div class="col-md-12 input-group">
                         <select name="status" id="status" class="form-control selectpicker">
-                            <option value="">Select status</option>
-                            <option>New</option>
-                            <option>In Progress</option>
-                            <option >Completed</option>
+
+                            <option >Select status</option>
+                            <option <#if "${repair.status}"=="New">selected</#if> >New</option>
+                            <option<#if "${repair.status}"=="In Progress">selected</#if> >In Progress</option>
+                            <option <#if "${repair.status}"=="Completed">selected</#if>>Completed</option>
                         </select>
                     </div>
                     <#list spring.status.errorMessages as error>
@@ -60,7 +61,7 @@
 
 
             <div class="form-group">
-                <@spring.bind "createRepairForm.cost"/>
+                <@spring.bind "editRepairForm.cost"/>
                 <label class="col-md-4 control-label">Cost</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="col-md-12 input-group">
@@ -73,11 +74,11 @@
             </div>
 
             <div class="form-group">
-                <@spring.bind "createRepairForm.type"/>
+                <@spring.bind "editRepairForm.type"/>
                 <label class="col-md-4 control-label">Type</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="col-md-12 input-group ">
-                        <input name="type" id="type" placeholder="Type" class="form-control"  type="text">
+                        <input  name="type" id="type" placeholder="Type" class="form-control"  type="text">
                      </div>
                     <#list spring.status.errorMessages as error>
                     <span>${error}</span>
@@ -86,11 +87,11 @@
             </div>
 
             <div class="form-group">
-                <@spring.bind "createRepairForm.textarea"/>
+                <@spring.bind "editRepairForm.textarea"/>
                 <label class="col-md-4 control-label">Comments</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="col-md-12 input-group">
-                        <textarea class="form-control col-md-12" rows="5" name="textarea" id="textarea" placeholder="Add your comment here.."></textarea>
+                        <textarea  class="form-control col-md-12" rows="5" name="textarea" id="textarea" placeholder="Add your comment here.."></textarea>
                     </div>
                      <#list spring.status.errorMessages as error>
                         <span>${error}</span>
@@ -102,7 +103,7 @@
             <div class="form-group">
             <label class="col-md-4 control-label"></label>
                 <div class="col-md-4"><br>
-                    <button type="submit" class="btn pull-right btn-warning" >Add Repair</button>
+                    <button type="submit" class="btn pull-right btn-warning" >Edit Repair</button>
                 </div>
             </div>
 
@@ -122,6 +123,7 @@
 
 
 <script>
+
 	$(document).ready(function(){
 		var date_input=$('input[name="datetime"]'); //our date input has the name "date"
 		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
@@ -132,6 +134,11 @@
 			autoclose: true,
 		})
 	})
+
+	document.getElementById("datetime").value= "${repair.datetime}" ;
+    document.getElementById("cost").value= "${repair.cost}";
+    document.getElementById("type").value= "${repair.type}";
+	document.getElementById("textarea").value= "${repair.textarea}";
 </script>
 
 

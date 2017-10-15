@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface RepairRepository extends CrudRepository<Repair,Long>{
     List<Repair> findAll();
+
+
 }

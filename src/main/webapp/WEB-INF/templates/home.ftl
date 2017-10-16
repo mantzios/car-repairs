@@ -16,7 +16,8 @@
         <th>Status</th>
         <th>Cost</th>
         <th>Description</th>
-        <th>edit</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -29,6 +30,7 @@
            <td>${item.cost}</td>
            <td>${item.textarea}</td>
            <td><a href="/admin/edit/repair?id=${item.id}"><image src="/edit.png" class=" "/></a></td>
+           <td><a href=""><image src="/delete.png" class=" "/></a></td>
 
        </tr>
        </#list>

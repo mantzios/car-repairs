@@ -17,6 +17,10 @@ public class CreateRepairForm {
 
     private String textarea;
 
+    private String time;
+
+  //  private String afm;
+
     public CreateRepairForm() {
     }
 
@@ -61,4 +65,20 @@ public class CreateRepairForm {
     public void setTextarea(String textarea) {
         this.textarea = textarea;
     }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    /*  public String getAfm() {
+        return afm;
+    }
+
+    public void setAfm(String afm) {
+        this.afm = afm;
+    }*/
 }

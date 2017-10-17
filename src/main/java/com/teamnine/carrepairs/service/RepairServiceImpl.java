@@ -32,5 +32,19 @@ public class RepairServiceImpl implements RepairService {
 
     }
 
+    @Override
+    public void deleteRepair(Long id) {
+        repairRepository.delete(id);
+    }
+
+    @Override
+    public List<Repair> searchByVehiclePlate(String vehiclePlate) {
+        return repairRepository.findRepairByVehiclePlate(vehiclePlate);
+    }
+
+    @Override
+    public List<Repair> searchByAFM(long afm) {
+        return repairRepository.findRepairByOwnerAFM(afm);
+    }
 
 }

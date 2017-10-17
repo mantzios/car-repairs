@@ -3,6 +3,7 @@ package com.teamnine.carrepairs.controller;
 import com.teamnine.carrepairs.converter.RepairConverter;
 import com.teamnine.carrepairs.domain.Repair;
 import com.teamnine.carrepairs.model.CreateRepairForm;
+import com.teamnine.carrepairs.model.SearchFormRepair;
 import com.teamnine.carrepairs.service.AccountService;
 import com.teamnine.carrepairs.service.RepairService;
 import org.slf4j.LoggerFactory;
@@ -11,18 +12,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Controller
 public class RepairsController {
     private  final static org.slf4j.Logger logger = LoggerFactory.getLogger(HomeController.class);
     private static final String FORM = "createRepairForm";
+
+    private static final String SEARCH_REPAIR = "searchForm";
+    private static final String LIST_REPAIRS = "repairs";
+
+    Set<Repair> repairSet;
 
     @Autowired
     private RepairService repairService;
@@ -72,4 +81,30 @@ public class RepairsController {
 
 
     }
+
+
+    @RequestMapping(value = "admin/repairs/delete/{id}", method = RequestMethod.GET)
+    public String delete(Model model, @PathVariable String id) {
+        repairService.deleteRepair(Long.parseLong(id));
+        return "redirect:/admin/home";
+    }
+
+    @RequestMapping(value = "admin/repairs/search", method = RequestMethod.GET)
+    public String search(Model model, @ModelAttribute(SEARCH_REPAIR) SearchFormRepair searchFormRepair) {
+        repairSet = new HashSet<>();
+        if (searchFormRepair.getAfm() != 0) {
+            //call service to search by id
+            repairSet.addAll(repairService.searchByAFM(searchFormRepair.getAfm()));
+        }
+        if (searchFormRepair.getVehiclePlate() != null) {
+            // call service to search  by vehicle plate
+            repairSet.addAll(repairService.searchByVehiclePlate(searchFormRepair.getVehiclePlate()));
+        }
+        model.addAttribute(LIST_REPAIRS, repairSet);
+        return "home";
+    }
+
+
+
+
 }

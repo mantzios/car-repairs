@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -47,4 +48,8 @@ public class RepairServiceImpl implements RepairService {
         return repairRepository.findRepairByOwnerAFM(afm);
     }
 
+    @Override
+    public List<Repair> searchByDate(Date start, Date end) {
+        return repairRepository.findAllByDatetimeBetween(start,end);
+    }
 }

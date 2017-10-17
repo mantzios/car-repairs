@@ -4,7 +4,6 @@ import com.teamnine.carrepairs.converter.RepairConverter;
 import com.teamnine.carrepairs.domain.Repair;
 import com.teamnine.carrepairs.model.CreateRepairForm;
 import com.teamnine.carrepairs.model.SearchFormRepair;
-import com.teamnine.carrepairs.service.AccountService;
 import com.teamnine.carrepairs.service.RepairService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +18,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 
 @Controller
 public class RepairsController {
-    private  final static org.slf4j.Logger logger = LoggerFactory.getLogger(HomeController.class);
+    private final static org.slf4j.Logger logger = LoggerFactory.getLogger(HomeController.class);
     private static final String FORM = "createRepairForm";
 
     private static final String SEARCH_REPAIR = "searchForm";
@@ -44,13 +42,12 @@ public class RepairsController {
     }
 
 
-
     @RequestMapping(value = "/admin/repairs", method = RequestMethod.POST)
     public String register(@Valid @ModelAttribute(FORM)
                                    CreateRepairForm createRepairForm,
                            BindingResult bindingResult, HttpSession session,
                            RedirectAttributes redirectAttributes) {
-         long id;
+        long id;
 
         if (bindingResult.hasErrors()) {
             //have some error handling here, perhaps add extra error messages to the model
@@ -70,16 +67,8 @@ public class RepairsController {
             logger.error("User registration failed: " + exception);
             return "redirect:/admin/repairs";
         }
-
-
-
-
-        redirectAttributes.addFlashAttribute("message", "Repair successfully added with id: "+id);
+        redirectAttributes.addFlashAttribute("message", "Repair successfully added with id: " + id);
         return "redirect:/admin/repairs";
-
-
-
-
     }
 
 
@@ -100,11 +89,17 @@ public class RepairsController {
             // call service to search  by vehicle plate
             repairSet.addAll(repairService.searchByVehiclePlate(searchFormRepair.getVehiclePlate()));
         }
+        /*
+        Calendar calendar= Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DATE,3);
+        calendar.set(Calendar.HOUR,0);
+        calendar.set(Calendar.MINUTE,0);
+        repairSet.addAll(repairService.searchByDate(new Date(),calendar.getTime()));
+        */
         model.addAttribute(LIST_REPAIRS, repairSet);
         return "home";
     }
-
-
 
 
 }

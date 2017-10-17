@@ -16,7 +16,10 @@ import java.util.Collection;
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
+    private static final String HOME = "/home";
+    private static final String ADMIN_HOME = "admin/home";
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
 
@@ -26,9 +29,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             System.out.println(grantedAuthority.getAuthority());
 
             if (grantedAuthority.getAuthority().equals("ADMIN")) {
-                redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "admin/owners");
+                redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, ADMIN_HOME);
             }else{
-                redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, "/home");
+                redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, HOME);
             }
         }
     }

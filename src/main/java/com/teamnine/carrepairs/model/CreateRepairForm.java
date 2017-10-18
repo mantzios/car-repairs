@@ -26,6 +26,7 @@ public class CreateRepairForm {
     private String afm;
 
     private String plate_num;
+     private String id_repair;
 
     public CreateRepairForm() {
     }
@@ -108,5 +109,13 @@ public class CreateRepairForm {
 
     public void setPlate_num(String plate_num) {
         this.plate_num = plate_num;
+    }
+
+    public String getId_repair() {
+        return id_repair;
+    }
+
+    public void setId_repair(String id_repair) {
+        this.id_repair = id_repair;
     }
 }

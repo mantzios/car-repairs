@@ -19,7 +19,7 @@
 
     <h3 style="color: green; font-weight: bold; font-size: 20px;">${message!""}</h3>
 
-        <form class="well form-horizontal" action="/admin/edit/repair?id=${repair.id}" method="post" id="editRepairForm" name="editRepairForm">
+        <form class="well form-horizontal" action="/admin/edit/repair?id=${repair.id_repair}" method="post" id="editRepairForm" name="editRepairForm">
 
             <div class="form-group">
                 <@spring.bind "editRepairForm.datetime"/>

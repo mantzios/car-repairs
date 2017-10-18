@@ -29,6 +29,7 @@ public class RepToFormConverter {
         createRepairForm.setStatus(repair.getStatus());
         createRepairForm.setType(repair.getType());
         createRepairForm.setTime(stringTime);
+        createRepairForm.setId_repair(String.valueOf(repair.getId()));
 
 
 

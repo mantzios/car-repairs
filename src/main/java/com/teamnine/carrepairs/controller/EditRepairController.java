@@ -30,10 +30,7 @@ public class EditRepairController {
         private RepairService repairService;
 
         @RequestMapping(value = "/admin/edit/repair", method = RequestMethod.GET)
-        public String register(Model model, @RequestParam(name = "id", required = true) long id,RedirectAttributes redirect) {
-            Repair repair = repairService.findById(id);
         public String register(Model model, @RequestParam(name = "id", required = true) long id) {
-
             CreateRepairForm createRepairForm= RepToFormConverter.buildFormObject(repairService.findById(id));
 
             model.addAttribute(FORM, new CreateRepairForm());

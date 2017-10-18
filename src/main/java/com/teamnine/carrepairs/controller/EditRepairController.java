@@ -17,6 +17,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Date;
+
 @Controller
 public class EditRepairController {
 
@@ -49,6 +51,7 @@ public class EditRepairController {
          repair.setId(id);
          Repair temp=repairService.findById(id);
          System.out.println();
+         repair.setDatetime(new Date());
          repair.setOwner(temp.getOwner());
          repair.setVehicle(temp.getVehicle());
          repairService.updateRepair(repair);

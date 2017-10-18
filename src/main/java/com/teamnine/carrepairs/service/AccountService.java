@@ -5,4 +5,5 @@ import org.springframework.security.core.AuthenticationException;
 
 public interface AccountService {
     Owner login(String username, String password) throws AuthenticationException;
+    Owner findOwnerbyAFM(long afm);
 }

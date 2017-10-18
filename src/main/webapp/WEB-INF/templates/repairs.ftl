@@ -98,6 +98,19 @@
             </div>
 
             <div class="form-group">
+                            <@spring.bind "createRepairForm.afm"/>
+                            <label class="col-md-4 control-label">Afm</label>
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="col-md-12 input-group">
+                                    <input  name="afm" id="afm" placeholder="afm" class="form-control"  type="text">
+                                </div>
+                                <#list spring.status.errorMessages as error>
+                                 <span>${error}</span>
+                                </#list>
+                            </div>
+                        </div>
+
+            <div class="form-group">
                 <@spring.bind "createRepairForm.type"/>
                 <label class="col-md-4 control-label">Type</label>
                 <div class="col-md-4 inputGroupContainer">
@@ -133,7 +146,7 @@
 
 
         </form>
-    </div>
+
  </div><!-- /.container -->
 </@layout>
 </body>

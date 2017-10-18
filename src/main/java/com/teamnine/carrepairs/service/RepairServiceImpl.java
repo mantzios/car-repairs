@@ -1,8 +1,10 @@
 package com.teamnine.carrepairs.service;
 
 import com.sun.org.apache.regexp.internal.RE;
+import com.teamnine.carrepairs.domain.Owner;
 import com.teamnine.carrepairs.domain.Repair;
 import com.teamnine.carrepairs.repository.RepairRepository;
+import com.teamnine.carrepairs.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,8 @@ public class RepairServiceImpl implements RepairService {
 
     @Override
     public long save(Repair repair) {
+
+
        Repair r = repairRepository.save(repair);
        return r.getId();
     }

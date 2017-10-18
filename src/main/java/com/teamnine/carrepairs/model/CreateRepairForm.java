@@ -19,7 +19,9 @@ public class CreateRepairForm {
 
     private String time;
 
-  //  private String afm;
+    private String afm;
+
+    private String plate_num;
 
     public CreateRepairForm() {
     }
@@ -74,11 +76,19 @@ public class CreateRepairForm {
         this.time = time;
     }
 
-    /*  public String getAfm() {
+      public String getAfm() {
         return afm;
     }
 
     public void setAfm(String afm) {
         this.afm = afm;
-    }*/
+    }
+
+    public String getPlate_num() {
+        return plate_num;
+    }
+
+    public void setPlate_num(String plate_num) {
+        this.plate_num = plate_num;
+    }
 }

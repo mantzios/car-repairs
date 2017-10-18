@@ -1,5 +1,6 @@
 package com.teamnine.carrepairs.controller;
 
+import com.teamnine.carrepairs.converter.RepToFormConverter;
 import com.teamnine.carrepairs.converter.RepairConverter;
 import com.teamnine.carrepairs.domain.Repair;
 import com.teamnine.carrepairs.model.CreateRepairForm;
@@ -31,10 +32,12 @@ public class EditRepairController {
         @RequestMapping(value = "/admin/edit/repair", method = RequestMethod.GET)
         public String register(Model model, @RequestParam(name = "id", required = true) long id,RedirectAttributes redirect) {
             Repair repair = repairService.findById(id);
+        public String register(Model model, @RequestParam(name = "id", required = true) long id) {
 
-            redirect.addFlashAttribute("obj",repair);
+            CreateRepairForm createRepairForm= RepToFormConverter.buildFormObject(repairService.findById(id));
+
             model.addAttribute(FORM, new CreateRepairForm());
-            model.addAttribute("repair", repair);
+            model.addAttribute("repair", createRepairForm);
             return "editRepair";
 
         }

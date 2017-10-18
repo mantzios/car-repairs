@@ -5,6 +5,8 @@ import com.teamnine.carrepairs.domain.Owner;
 import com.teamnine.carrepairs.domain.Repair;
 import com.teamnine.carrepairs.model.CreateRepairForm;
 import com.teamnine.carrepairs.repository.UserRepository;
+import com.teamnine.carrepairs.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -13,12 +15,17 @@ import java.util.Date;
 
 
 public class RepairConverter {
+    @Autowired
+    private static AccountService accountService;
+
 
     public static Repair buildRepairObject(CreateRepairForm createRepairForm) {
         Repair repair = new Repair();
         Owner owner = new Owner();
         UserRepository userRepository;
-      //  owner =userRepository.findOne(createRepairF)
+        long a=Long.parseLong(createRepairForm.getAfm());
+
+        owner =accountService.findOwnerbyAFM(a);
         String dateString = createRepairForm.getDatetime().concat(" "+createRepairForm.getTime());
 
 
@@ -34,11 +41,8 @@ public class RepairConverter {
         repair.setStatus(createRepairForm.getStatus());
         repair.setType(createRepairForm.getType());
         repair.setTextarea(createRepairForm.getTextarea());
+        repair.setOwner(owner);
 
-        //owner_id apo tin createRepairForm
-        //Owner service findOne
-        // set ton owner pou vrethike
-        //repair.setOwner(owner );
         return repair;
     }
 }

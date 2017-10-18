@@ -4,24 +4,55 @@
 <@layout flag="home" >
 <div class="container">
 
-<button type="button" style="margin:10px"  class="btn btn-warning pull-right" id="createBtn" onClick="location.href='/admin/repairs'" >Add New Repair</button>
-<div class="container">
+<p><div><button type="button" style="margin:10px"  class="btn btn-warning pull-right" id="createBtn" onClick="location.href='/admin/repairs'" >Add New Repair</button>
+</div></p>
+
+<h4 style=" font-weight: bold; font-size: 20px;">Vres ena repair</h4>
 <div class="row">
+
+
 <form action="/admin/repairs/search" method="get" name="searchForm">
-   <label for="afm">Search by AFM</label>
-   <input type="text" class="form-control" name="afm" placeholder="Enter afm">
-   <button type="submit" class="btn btn-default">Submit</button>
+
+        <div class="form-group ">
+
+                        <div class="col-md-2 inputGroupContainer">
+                            <div class="col-md-12 input-group ">
+                                <input  type="text" class="form-control" name="afm" placeholder="Enter afm">
+                                <span class="input-group-btn">
+                                       <button type="submit" class="btn btn-default">Submit</button>
+                                    </span>
+
+
+                             </div>
+
+
+                        </div>
+                  </div>
+
 </form>
-   <form action="/admin/repairs/search" method="get" name="searchForm">
-   <label for="vehiclePlate">Vehicle Plate</label>
-   <input type="text" class="form-control" name="vehiclePlate" placeholder="ABC-1234">
-       <button type="submit" class="btn btn-default">Submit</button>
-   </form>
 
 
+
+<form action="/admin/repairs/search" method="get" name="searchForm">
+        <div class="form-group">
+
+                        <div class="col-md-2 inputGroupContainer">
+                            <div class="col-md-12 input-group ">
+                                <input type="text" class="form-control" name="vehiclePlate" placeholder="ABC-1234">
+                                 <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-default">Submit</button>
+                                    </span>
+                             </div>
+
+
+                        </div>
+                  </div>
+
+</form>
+</div>
 </div>
 
-</div>
+<div class="container" style="margin-top:50px">
 
 <table class="table table-hover">
     <thead>

@@ -27,10 +27,10 @@ public class EditRepairController {
         private RepairService repairService;
 
         @RequestMapping(value = "/admin/edit/repair", method = RequestMethod.GET)
-        public String register(Model model, @RequestParam(name = "id", required = true) long id) {
+        public String register(Model model, @RequestParam(name = "id", required = true) long id,RedirectAttributes redirect) {
             Repair repair = repairService.findById(id);
 
-
+            redirect.addFlashAttribute("obj",repair);
             model.addAttribute(FORM, new CreateRepairForm());
             model.addAttribute("repair", repair);
             return "editRepair";
@@ -39,42 +39,30 @@ public class EditRepairController {
 
 
 
-      /*  @RequestMapping(value = "/admin/repairs", method = RequestMethod.POST)
-        public String register(@Valid @ModelAttribute(FORM)
-                                       CreateRepairForm createRepairForm,
-                               BindingResult bindingResult, HttpSession session,
-                               RedirectAttributes redirectAttributes) {
-            long id;
+     @RequestMapping(value = "/admin/edit/repair", method = RequestMethod.POST)
+        public String register(@Valid @ModelAttribute(FORM) CreateRepairForm createRepairForm,
+                               Model model,
+                               @RequestParam(name = "id", required = true) long id)
+     {
 
-            if (bindingResult.hasErrors()) {
-                //have some error handling here, perhaps add extra error messages to the model
-                //for now we're going to return a view ( register) but normally we would redirect to the
-                //get method after adding the binding result and the form to the redirect attributes.
-                logger.error(String.format("%s Validation Errors present: ", bindingResult.getErrorCount()));
-                return "repairs";
-            }
+         Repair repair = RepairConverter.buildRepairObject(createRepairForm);
+         repair.setId(id);
+         Repair temp=repairService.findById(id);
+         System.out.println();
+         repair.setOwner(temp.getOwner());
+         repair.setVehicle(temp.getVehicle());
+         repairService.updateRepair(repair);
 
-            try {
-                Repair repair = RepairConverter.buildRepairObject(createRepairForm);
-                id = repairService.save(repair);
-
-            } catch (Exception exception) {
+             /*
                 //if an error occurs show it to the user
                 redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());
                 logger.error("User registration failed: " + exception);
-                return "redirect:/admin/repairs";
-            }
+                return "redirect:/admin/home";*/
 
 
-
-
-            redirectAttributes.addFlashAttribute("message", "Repair successfully added with id: "+id);
-            return "redirect:/admin/repairs";
-
-
-
-
-        }*/
+         //redirectAttributes.addFlashAttribute("message", "Repair successfully updated with id: ");
+         return "redirect:/admin/home";
+        }
     }
 
 

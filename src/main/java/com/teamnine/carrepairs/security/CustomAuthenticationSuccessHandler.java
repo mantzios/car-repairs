@@ -16,23 +16,29 @@ import java.util.Collection;
 @Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
+    private static final String EMAIL = "email";
     private static final String HOME = "/home";
     private static final String ADMIN_HOME = "admin/home";
+    private static final String ADMIN = "ADMIN";
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-
+        addEmailToSession(httpServletRequest,authentication);
         Collection<? extends GrantedAuthority> authorities= authentication.getAuthorities();
         authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
             System.out.println(grantedAuthority.getAuthority());
 
-            if (grantedAuthority.getAuthority().equals("ADMIN")) {
+            if (grantedAuthority.getAuthority().equals(ADMIN)) {
                 redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, ADMIN_HOME);
             }else{
                 redirectStrategy.sendRedirect(httpServletRequest, httpServletResponse, HOME);
             }
         }
+    }
+
+    private void addEmailToSession(HttpServletRequest httpServletRequest,Authentication authentication) {
+        httpServletRequest.getSession().setAttribute(EMAIL,authentication.getPrincipal());
     }
 }

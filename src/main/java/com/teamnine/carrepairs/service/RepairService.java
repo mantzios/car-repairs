@@ -20,5 +20,7 @@ public interface RepairService {
 
     List<Repair> searchByDate(Date start,Date end);
 
-//    List<Repair> searchByDate(Date date);
+    List<Repair> searchByDate(Date date);
+
+    void updateRepair(Repair repair);
 }

@@ -90,13 +90,9 @@ public class RepairsController {
             repairSet.addAll(repairService.searchByVehiclePlate(searchFormRepair.getVehiclePlate()));
         }
         /*
-        Calendar calendar= Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.add(Calendar.DATE,3);
-        calendar.set(Calendar.HOUR,0);
-        calendar.set(Calendar.MINUTE,0);
         repairSet.addAll(repairService.searchByDate(new Date(),calendar.getTime()));
         */
+        repairService.searchByDate(new Date());
         model.addAttribute(LIST_REPAIRS, repairSet);
         return "home";
     }

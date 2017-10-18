@@ -7,6 +7,10 @@ import java.util.Date;
 
 public class CreateRepairForm {
 
+    private String owner_id;
+
+    private String vehicle_id;
+
     private String datetime;
 
     private String status;
@@ -24,7 +28,21 @@ public class CreateRepairForm {
     public CreateRepairForm() {
     }
 
+    public String getOwner_id() {
+        return owner_id;
+    }
 
+    public void setOwner_id(String owner_id) {
+        this.owner_id = owner_id;
+    }
+
+    public String getVehicle_id() {
+        return vehicle_id;
+    }
+
+    public void setVehicle_id(String vehicle_id) {
+        this.vehicle_id = vehicle_id;
+    }
 
     public String getDatetime() {
         return datetime;

@@ -35,11 +35,11 @@ public class Owner implements Serializable {
     private String access;
 
 
-    @OneToMany(mappedBy = "owner",targetEntity = Vehicle.class,cascade =CascadeType.REMOVE,orphanRemoval = true)
+    @OneToMany(mappedBy = "owner",targetEntity = Vehicle.class,cascade =CascadeType.REMOVE,orphanRemoval = true, fetch =FetchType.EAGER)
     private Set<Vehicle> vehicle;
 
 
-    @OneToMany(mappedBy = "owner",targetEntity = Repair.class)
+    @OneToMany(mappedBy = "owner",targetEntity = Repair.class,cascade =CascadeType.REMOVE,orphanRemoval = true,fetch =FetchType.EAGER)
     private Set<Repair> repair;
 
     public Set<Repair> getRepair() {

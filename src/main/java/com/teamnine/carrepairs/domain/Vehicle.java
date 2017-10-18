@@ -30,7 +30,7 @@ public class Vehicle {
     @JoinColumn(name = "Owner_id",referencedColumnName = "Owner_id")
     private Owner owner;
 
-    @OneToMany(mappedBy = "vehicle",targetEntity = Repair.class)
+    @OneToMany(mappedBy = "vehicle",targetEntity = Repair.class,cascade =CascadeType.ALL,orphanRemoval = true)
     private Set<Repair> repairs;
 
     public Set<Repair> getRepairs() {

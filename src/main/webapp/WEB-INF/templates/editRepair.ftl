@@ -40,26 +40,6 @@
             </div>
 
             <div class="form-group">
-                            <@spring.bind "editRepairForm.time"/>
-                            <label class="control-label col-md-4 ">Time</label>
-                            <div class="col-md-4">
-                                <div class="col-md-12 input-group clockpicker">
-                                    <div class="input-group-addon">
-                                        <i class="glyphicon glyphicon-time">
-                                        </i>
-                                    </div>
-                                        <input type="text" class="form-control" id="time" name="time" >
-                                </div>
-                            </div>
-                            <#list spring.status.errorMessages as error>
-                            <span>${error}</span>
-                            </#list>
-                        </div>
-
-
-
-
-            <div class="form-group">
                 <@spring.bind "editRepairForm.status"/>
                 <label class="col-md-4 control-label">Status</label>
                 <div class="col-md-4 selectContainer">
@@ -152,19 +132,8 @@
 			todayHighlight: true,
 			autoclose: true,
 		})
-
-		var time_input=$('input[name="time"]');
-                		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-                		time_input.clockpicker({
-
-                		container: container,
-                         autoclose: true,
-
-                		})
-        	})
 	})
 	document.getElementById("datetime").value= "${repair.datetime}" ;
-	document.getElementById("time").value= "${repair.time}" ;
     document.getElementById("cost").value= "${repair.cost}";
     document.getElementById("type").value= "${repair.type}";
 	document.getElementById("textarea").value= "${repair.textarea}";

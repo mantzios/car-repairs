@@ -56,18 +56,10 @@ public class RepairsController {
             logger.error(String.format("%s Validation Errors present: ", bindingResult.getErrorCount()));
             return "repairs";
         }
-
-      //  try {
-            Repair repair = RepairConverter.buildRepairObject(createRepairForm);
-            id = repairService.save(repair);
-
-       /* } catch (Exception exception) {
-            //if an error occurs show it to the user
-            redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());
-            return "redirect:/admin/repairs";
-        }*/
+        Repair repair = RepairConverter.buildRepairObject(createRepairForm);
+        id = repairService.save(repair);
         redirectAttributes.addFlashAttribute("message", "Repair successfully added with id: " + id);
-        return "redirect:/admin/repairs";
+        return "redirect:/admin/home";
     }
 
 

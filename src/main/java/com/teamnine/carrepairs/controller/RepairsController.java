@@ -57,15 +57,15 @@ public class RepairsController {
             return "repairs";
         }
 
-        try {
+      //  try {
             Repair repair = RepairConverter.buildRepairObject(createRepairForm);
             id = repairService.save(repair);
 
-        } catch (Exception exception) {
+       /* } catch (Exception exception) {
             //if an error occurs show it to the user
             redirectAttributes.addFlashAttribute("errorMessage", exception.getMessage());
             return "redirect:/admin/repairs";
-        }
+        }*/
         redirectAttributes.addFlashAttribute("message", "Repair successfully added with id: " + id);
         return "redirect:/admin/repairs";
     }

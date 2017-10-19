@@ -23,7 +23,7 @@ public class CreateRepairForm {
 
     private String time;
 
-    private String afm;
+    private long afm;
 
     private String plate_num;
      private String id_repair;
@@ -95,11 +95,11 @@ public class CreateRepairForm {
         this.time = time;
     }
 
-      public String getAfm() {
+      public long getAfm() {
         return afm;
     }
 
-    public void setAfm(String afm) {
+    public void setAfm(long afm) {
         this.afm = afm;
     }
 

@@ -29,6 +29,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Owner findOwnerbyAFM(long afm) {
+        System.out.println();
         return userRepository.findOwnerByAFM(afm);
     }
 

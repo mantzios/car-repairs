@@ -39,41 +39,25 @@
                 </#list>
             </div>
 
-            <div class="form-group" hidden="hidden">
-                <@spring.bind "editRepairForm.owner_id"/>
-                <label class="control-label col-md-4 requiredField" for="date">Date</label>
-
-                <div class="col-md-4">
-                    <div class="col-md-12 input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar">
-                            </i>
-                        </div>
-                        <input class="form-control" id="datetime" name="owner_id" placeholder="select date.." type="text"/>
-                    </div>
-                </div>
-                <#list spring.status.errorMessages as error>
-                    <span>${error}</span>
-                </#list>
-            </div>
-
             <div class="form-group">
-                <@spring.bind "editRepairForm.datetime"/>
-                <label class="control-label col-md-4 requiredField" for="date">Date</label>
-
-                <div class="col-md-4">
-                    <div class="col-md-12 input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar">
-                            </i>
+                            <@spring.bind "editRepairForm.time"/>
+                            <label class="control-label col-md-4 ">Time</label>
+                            <div class="col-md-4">
+                                <div class="col-md-12 input-group clockpicker">
+                                    <div class="input-group-addon">
+                                        <i class="glyphicon glyphicon-time">
+                                        </i>
+                                    </div>
+                                        <input type="text" class="form-control" id="time" name="time" >
+                                </div>
+                            </div>
+                            <#list spring.status.errorMessages as error>
+                            <span>${error}</span>
+                            </#list>
                         </div>
-                        <input class="form-control" id="datetime" name="datetime" placeholder="select date.." type="text"/>
-                    </div>
-                </div>
-                <#list spring.status.errorMessages as error>
-                    <span>${error}</span>
-                </#list>
-            </div>
+
+
+
 
             <div class="form-group">
                 <@spring.bind "editRepairForm.status"/>
@@ -168,8 +152,19 @@
 			todayHighlight: true,
 			autoclose: true,
 		})
+
+		var time_input=$('input[name="time"]');
+                		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+                		time_input.clockpicker({
+
+                		container: container,
+                         autoclose: true,
+
+                		})
+        	})
 	})
 	document.getElementById("datetime").value= "${repair.datetime}" ;
+	document.getElementById("time").value= "${repair.time}" ;
     document.getElementById("cost").value= "${repair.cost}";
     document.getElementById("type").value= "${repair.type}";
 	document.getElementById("textarea").value= "${repair.textarea}";

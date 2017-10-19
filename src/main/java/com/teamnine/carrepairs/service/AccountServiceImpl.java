@@ -32,4 +32,14 @@ public class AccountServiceImpl implements AccountService {
         return userRepository.findOwnerByAFM(afm);
     }
 
+    @Override
+    public List<Owner> findAllOwners() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public void insertUser(Owner owner) {
+        userRepository.save(owner);
+    }
+
 }

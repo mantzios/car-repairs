@@ -1,9 +1,6 @@
 package com.teamnine.carrepairs.domain;
 
-import com.sun.org.apache.regexp.internal.RE;
-
 import javax.persistence.*;
-
 import java.io.Serializable;
 import java.util.Set;
 
@@ -12,11 +9,11 @@ import java.util.Set;
 public class Owner implements Serializable {
 
     @Id
-    @Column(name = "Owner_id", nullable =false)
-    @GeneratedValue(strategy =GenerationType.AUTO)
+    @Column(name = "Owner_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long ownerid;
 
-    @Column(name = "afm_number", nullable =false)
+    @Column(name = "afm_number", nullable = false)
     private int afm;
 
     @Column(name = "name")
@@ -25,21 +22,21 @@ public class Owner implements Serializable {
     @Column(name = "lastname")
     private String lastname;
 
-    @Column(name = "email",nullable =false)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password",nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "access",nullable = false)
+    @Column(name = "access", nullable = false)
     private String access;
 
 
-    @OneToMany(mappedBy = "owner",targetEntity = Vehicle.class,cascade =CascadeType.REMOVE,orphanRemoval = true, fetch =FetchType.EAGER)
+    @OneToMany(mappedBy = "owner", targetEntity = Vehicle.class, cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Vehicle> vehicle;
 
 
-    @OneToMany(mappedBy = "owner",targetEntity = Repair.class,cascade =CascadeType.REMOVE,orphanRemoval = true,fetch =FetchType.EAGER)
+    @OneToMany(mappedBy = "owner", targetEntity = Repair.class, cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Repair> repair;
 
     public Set<Repair> getRepair() {
@@ -81,7 +78,6 @@ public class Owner implements Serializable {
     public void setAccess(String access) {
         this.access = access;
     }
-
 
 
     public long getOwnerid() {

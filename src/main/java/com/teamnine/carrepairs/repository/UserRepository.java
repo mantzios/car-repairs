@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public interface UserRepository extends CrudRepository<Owner,Long> {
 
+    List<Owner> findAll();
 
     Owner findByEmailAndPassword(String email,String password);
 

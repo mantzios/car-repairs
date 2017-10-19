@@ -26,7 +26,8 @@ public class CreateRepairForm {
     private String afm;
 
     private String plate_num;
-     private String id_repair;
+
+    private String id_repair;
 
     public CreateRepairForm() {
     }

@@ -39,42 +39,6 @@
                 </#list>
             </div>
 
-            <div class="form-group" hidden="hidden">
-                <@spring.bind "editRepairForm.owner_id"/>
-                <label class="control-label col-md-4 requiredField" for="date">Date</label>
-
-                <div class="col-md-4">
-                    <div class="col-md-12 input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar">
-                            </i>
-                        </div>
-                        <input class="form-control" id="datetime" name="owner_id" placeholder="select date.." type="text"/>
-                    </div>
-                </div>
-                <#list spring.status.errorMessages as error>
-                    <span>${error}</span>
-                </#list>
-            </div>
-
-            <div class="form-group">
-                <@spring.bind "editRepairForm.datetime"/>
-                <label class="control-label col-md-4 requiredField" for="date">Date</label>
-
-                <div class="col-md-4">
-                    <div class="col-md-12 input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar">
-                            </i>
-                        </div>
-                        <input class="form-control" id="datetime" name="datetime" placeholder="select date.." type="text"/>
-                    </div>
-                </div>
-                <#list spring.status.errorMessages as error>
-                    <span>${error}</span>
-                </#list>
-            </div>
-
             <div class="form-group">
                 <@spring.bind "editRepairForm.status"/>
                 <label class="col-md-4 control-label">Status</label>

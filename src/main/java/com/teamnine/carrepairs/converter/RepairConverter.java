@@ -23,16 +23,18 @@ public class RepairConverter {
         Repair repair = new Repair();
         Owner owner = new Owner();
         UserRepository userRepository;
-        long a=Long.parseLong(createRepairForm.getAfm());
-
-        owner =accountService.findOwnerbyAFM(a);
+        if(createRepairForm.getAfm()!=null) {
+            long a = Long.parseLong(createRepairForm.getAfm());
+            owner = accountService.findOwnerbyAFM(a);
+        }
         String dateString = createRepairForm.getDatetime().concat(" "+createRepairForm.getTime());
 
 
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         try{
         Date date = format.parse(dateString);
-            repair.setDatetime(date);} catch (ParseException e) {
+            repair.setDatetime(date);
+        } catch (ParseException e) {
             e.printStackTrace();
         }
 
@@ -42,6 +44,7 @@ public class RepairConverter {
         repair.setType(createRepairForm.getType());
         repair.setTextarea(createRepairForm.getTextarea());
         repair.setOwner(owner);
+
 
 
         return repair;

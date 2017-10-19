@@ -76,6 +76,7 @@
            <td>${item.status}</td>
            <td>${item.cost}</td>
            <td>${item.textarea}</td>
+
            <td><a href="/admin/edit/repair?id=${item.id}"><image src="/edit.png" class=" "/></a></td>
            <td><a href="/admin/repairs/delete/${item.id}"><image src="/delete.png" class=" "/></a></td>
 

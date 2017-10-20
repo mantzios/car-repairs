@@ -6,16 +6,12 @@
 
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-<!-- Include Date Range Picker -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-
 <script type="text/javascript" src="https://formden.com/static/cdn/formden.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"></script>
-<!-- Special version of Bootstrap that is isolated to content wrapped in .bootstrap-iso -->
-<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.js"></script>
 
-<!--Font Awesome (added because you use icons in your prepend/append)-->
+
+<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
 <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
@@ -99,7 +95,7 @@
 
             <div class="form-group">
                             <@spring.bind "createRepairForm.afm"/>
-                            <label class="col-md-4 control-label">Afm</label>
+                            <label class="col-md-4 control-label">Owner's AFM</label>
                             <div class="col-md-4 inputGroupContainer">
                                 <div class="col-md-12 input-group">
                                     <input  name="afm" id="afm" placeholder="afm" class="form-control"  type="text">
@@ -108,7 +104,21 @@
                                  <span>${error}</span>
                                 </#list>
                             </div>
-                        </div>
+
+            </div>
+
+            <div class="form-group">
+                            <@spring.bind "createRepairForm.plate_num"/>
+                            <label class="col-md-4 control-label">Plate Number</label>
+                            <div class="col-md-4 inputGroupContainer">
+                                <div class="col-md-12 input-group">
+                                    <input  name="plate_num" id="plate_num" placeholder="ABC-1234" class="form-control"  type="text">
+                                </div>
+                                <#list spring.status.errorMessages as error>
+                                 <span>${error}</span>
+                                </#list>
+                            </div>
+            </div>
 
             <div class="form-group">
                 <@spring.bind "createRepairForm.type"/>

@@ -1,7 +1,15 @@
 package com.teamnine.carrepairs.model;
 
-public class CreateRepairForm {
+import com.teamnine.carrepairs.domain.Repair;
 
+import javax.validation.constraints.Pattern;
+import java.util.Date;
+
+public class EditRepairForm {
+
+    private String owner_id;
+
+    private String vehicle_id;
 
     private String datetime;
 
@@ -18,12 +26,26 @@ public class CreateRepairForm {
     private String afm;
 
     private String plate_num;
-    private String id_repair;
+     private String id_repair;
 
-    public CreateRepairForm() {
+    public EditRepairForm() {
     }
 
+    public String getOwner_id() {
+        return owner_id;
+    }
 
+    public void setOwner_id(String owner_id) {
+        this.owner_id = owner_id;
+    }
+
+    public String getVehicle_id() {
+        return vehicle_id;
+    }
+
+    public void setVehicle_id(String vehicle_id) {
+        this.vehicle_id = vehicle_id;
+    }
 
     public String getDatetime() {
         return datetime;
@@ -73,7 +95,7 @@ public class CreateRepairForm {
         this.time = time;
     }
 
-    public String getAfm() {
+      public String getAfm() {
         return afm;
     }
 
@@ -96,5 +118,4 @@ public class CreateRepairForm {
     public void setId_repair(String id_repair) {
         this.id_repair = id_repair;
     }
-    }
-
+}

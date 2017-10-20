@@ -3,11 +3,11 @@ package com.teamnine.carrepairs.converter;
 
 import com.teamnine.carrepairs.domain.Owner;
 import com.teamnine.carrepairs.domain.Repair;
+import com.teamnine.carrepairs.domain.Vehicle;
 import com.teamnine.carrepairs.model.CreateRepairForm;
 import com.teamnine.carrepairs.repository.UserRepository;
 import com.teamnine.carrepairs.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -16,17 +16,14 @@ import java.util.Date;
 
 
 public class RepairConverter {
-
+    @Autowired
     private static AccountService accountService;
 
-    public static Repair buildRepairObject(CreateRepairForm createRepairForm) {
+
+    public Repair buildRepairObject(CreateRepairForm createRepairForm,Owner owner,Vehicle vehicle) {
+
         Repair repair = new Repair();
-        Owner owner = new Owner();
-        UserRepository userRepository;
-        if( createRepairForm.getAfm()!= null) {
-            long a = Long.parseLong(createRepairForm.getAfm());
-            owner = accountService.findOwnerbyAFM(a);
-        }
+
         String dateString = createRepairForm.getDatetime().concat(" "+createRepairForm.getTime());
 
 
@@ -44,6 +41,7 @@ public class RepairConverter {
         repair.setType(createRepairForm.getType());
         repair.setTextarea(createRepairForm.getTextarea());
         repair.setOwner(owner);
+        repair.setVehicle(vehicle);
 
 
 

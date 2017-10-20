@@ -1,6 +1,6 @@
 <#macro layout flag>
 <!DOCTYPE html>
-<html lang="en">
+<html >
 <head>
 
     <meta charset="utf-8">
@@ -16,7 +16,7 @@
 <div>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-      <div class="container">
+  <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Booo</a>
     </div>

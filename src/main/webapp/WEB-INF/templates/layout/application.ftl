@@ -1,6 +1,6 @@
 <#macro layout flag>
 <!DOCTYPE html>
-<html lang="en">
+<html >
 <head>
 
     <meta charset="utf-8">
@@ -16,6 +16,7 @@
 <div>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Booo</a>
     </div>
@@ -24,6 +25,7 @@
       <li class="<#if flag=="owners">active</#if>"><a href="/admin/owners">Owners</a></li>
       <li class="<#if flag=="repairs">active</#if>"><a href="/admin/repairs">Repairs</a></li>
     </ul>
+  </div>
   </div>
 </nav>
 

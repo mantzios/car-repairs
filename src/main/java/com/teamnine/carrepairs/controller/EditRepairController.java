@@ -2,8 +2,9 @@ package com.teamnine.carrepairs.controller;
 
 import com.teamnine.carrepairs.converter.RepToFormConverter;
 import com.teamnine.carrepairs.converter.RepairConverter;
+import com.teamnine.carrepairs.converter.RepairConverterEdit;
 import com.teamnine.carrepairs.domain.Repair;
-import com.teamnine.carrepairs.model.CreateRepairForm;
+import com.teamnine.carrepairs.model.EditRepairForm;
 import com.teamnine.carrepairs.service.RepairService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +33,10 @@ public class EditRepairController {
         Repair repair = repairService.findById(id);
 
 
-        CreateRepairForm createRepairForm = RepToFormConverter.buildFormObject(repairService.findById(id));
+        EditRepairForm editRepairForm = RepToFormConverter.buildFormObject(repairService.findById(id));
 
-        model.addAttribute(FORM, new CreateRepairForm());
-        model.addAttribute("repair", createRepairForm);
+        model.addAttribute(FORM, new EditRepairForm());
+        model.addAttribute("repair", editRepairForm);
 
         return "editRepair";
 
@@ -43,15 +44,15 @@ public class EditRepairController {
 
 
     @RequestMapping(value = "/admin/edit/repair", method = RequestMethod.POST)
-    public String register(@Valid @ModelAttribute(FORM) CreateRepairForm createRepairForm,
+    public String register(@Valid @ModelAttribute(FORM) EditRepairForm editRepairForm,
                            Model model,
                            @RequestParam(name = "id", required = true) long id) {
 
-        Repair repair = RepairConverter.buildRepairObject(createRepairForm);
+        Repair repair = RepairConverterEdit.buildRepairObject(editRepairForm);
         repair.setId(id);
         Repair temp = repairService.findById(id);
         System.out.println();
-        repair.setDatetime(new Date());
+        //repair.setDatetime(new Date());
         repair.setOwner(temp.getOwner());
         repair.setVehicle(temp.getVehicle());
         repairService.updateRepair(repair);

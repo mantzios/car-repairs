@@ -16,7 +16,7 @@ public class Owner implements Serializable {
     @GeneratedValue(strategy =GenerationType.AUTO)
     private long ownerid;
 
-    @Column(name = "afm_number", nullable =false)
+    @Column(name = "afm_number", nullable =false, unique = true)
     private int afm;
 
     @Column(name = "name")

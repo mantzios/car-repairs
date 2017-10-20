@@ -3,7 +3,10 @@ package com.teamnine.carrepairs.controller;
 import com.teamnine.carrepairs.converter.RepairConverter;
 import com.teamnine.carrepairs.domain.Repair;
 import com.teamnine.carrepairs.model.CreateRepairForm;
+import com.teamnine.carrepairs.model.EditRepairForm;
 import com.teamnine.carrepairs.model.SearchFormRepair;
+import com.teamnine.carrepairs.repository.VehicleRepository;
+import com.teamnine.carrepairs.service.AccountService;
 import com.teamnine.carrepairs.service.RepairService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +27,7 @@ import java.util.*;
 @Controller
 public class RepairsController {
     private final static org.slf4j.Logger logger = LoggerFactory.getLogger(HomeController.class);
-    private static final String FORM = "createRepairForm";
+    private static final String  CREATE_FORM= "createRepairForm";
 
     private static final String SEARCH_REPAIR = "searchForm";
     private static final String LIST_REPAIRS = "repairs";
@@ -33,17 +36,25 @@ public class RepairsController {
 
     @Autowired
     private RepairService repairService;
+    @Autowired
+    private AccountService accountService;
+
+
+    @Autowired
+    private RepairConverter repairConverter;
+    @Autowired
+    private VehicleRepository vehicleRepository;
 
     @RequestMapping(value = "/admin/repairs", method = RequestMethod.GET)
     public String register(Model model) {
-        model.addAttribute(FORM, new CreateRepairForm());
+        model.addAttribute(CREATE_FORM, new CreateRepairForm());
         return "repairs";
 
     }
 
 
     @RequestMapping(value = "/admin/repairs", method = RequestMethod.POST)
-    public String register(@Valid @ModelAttribute(FORM)
+    public String register(@Valid @ModelAttribute(CREATE_FORM)
                                    CreateRepairForm createRepairForm,
                            BindingResult bindingResult, HttpSession session,
                            RedirectAttributes redirectAttributes) {
@@ -56,7 +67,10 @@ public class RepairsController {
             logger.error(String.format("%s Validation Errors present: ", bindingResult.getErrorCount()));
             return "repairs";
         }
-        Repair repair = RepairConverter.buildRepairObject(createRepairForm);
+        Repair repair = repairConverter.buildRepairObject(createRepairForm,
+                        accountService.findOwnerbyAFM(Long.parseLong(createRepairForm.getAfm())),
+                        vehicleRepository.findByPlate(createRepairForm.getPlate_num()));
+
         id = repairService.save(repair);
         redirectAttributes.addFlashAttribute("message", "Repair successfully added with id: " + id);
         return "redirect:/admin/home";

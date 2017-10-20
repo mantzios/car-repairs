@@ -3,28 +3,25 @@
 <@layout flag="repairs">
 <#import "/spring.ftl" as spring/>
 <head>
-
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.11.0.js'></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <script type="text/javascript" src="https://formden.com/static/cdn/formden.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.js"></script>
 
-<!-- Special version of Bootstrap that is isolated to content wrapped in .bootstrap-iso -->
+
 <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
-
-<!--Font Awesome (added because you use icons in your prepend/append)-->
 <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
 </head>
-
 <body>
  <div class="container">
-
     <h3 style="color: green; font-weight: bold; font-size: 20px;">${message!""}</h3>
-
         <form class="well form-horizontal" action="/admin/edit/repair?id=${repair.id_repair}" method="post" id="editRepairForm" name="editRepairForm">
-
             <div class="form-group">
                 <@spring.bind "editRepairForm.datetime"/>
                 <label class="control-label col-md-4 requiredField" for="date">Date</label>
-
                 <div class="col-md-4">
                     <div class="col-md-12 input-group">
                         <div class="input-group-addon">
@@ -39,13 +36,32 @@
                 </#list>
             </div>
 
+
+             <div class="form-group">
+                            <@spring.bind "editRepairForm.time"/>
+                            <label class="control-label col-md-4 ">Time</label>
+                            <div class="col-md-4">
+                                <div class="col-md-12 input-group clockpicker">
+                                    <div class="input-group-addon">
+                                        <i class="glyphicon glyphicon-time">
+                                        </i>
+                                    </div>
+                                        <input type="text" class="form-control" id="time" name="time" placeholder="select time..">
+                                </div>
+                            </div>
+                            <#list spring.status.errorMessages as error>
+                            <span>${error}</span>
+                            </#list>
+            </div>
+
+
+
             <div class="form-group">
                 <@spring.bind "editRepairForm.status"/>
                 <label class="col-md-4 control-label">Status</label>
                 <div class="col-md-4 selectContainer">
                     <div class="col-md-12 input-group">
                         <select name="status" id="status" class="form-control selectpicker">
-
                             <option >Select status</option>
                             <option <#if "${repair.status}"=="New">selected</#if> >New</option>
                             <option<#if "${repair.status}"=="In Progress">selected</#if> >In Progress</option>
@@ -57,8 +73,6 @@
                     </#list>
                 </div>
             </div>
-
-
             <div class="form-group">
                 <@spring.bind "editRepairForm.cost"/>
                 <label class="col-md-4 control-label">Cost</label>
@@ -71,7 +85,6 @@
                     </#list>
                 </div>
             </div>
-
             <div class="form-group">
                 <@spring.bind "editRepairForm.type"/>
                 <label class="col-md-4 control-label">Type</label>
@@ -84,7 +97,6 @@
                     </#list>
                 </div>
             </div>
-
             <div class="form-group">
                 <@spring.bind "editRepairForm.textarea"/>
                 <label class="col-md-4 control-label">Comments</label>
@@ -97,47 +109,42 @@
                      </#list>
                 </div>
             </div>
-
-
             <div class="form-group">
             <label class="col-md-4 control-label"></label>
                 <div class="col-md-4"><br>
                     <button type="submit" class="btn pull-right btn-warning" >Edit Repair</button>
                 </div>
             </div>
-
-
         </form>
     </div>
  </div><!-- /.container -->
 </@layout>
 </body>
 </html>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-<!-- Include Date Range Picker -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-
-
 
 <script>
+    $(document).ready(function(){
+    		var date_input=$('input[name="datetime"]');
+    		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+    		date_input.datepicker({
+    			format: 'dd/mm/yyyy',
+    			container: container,
+    			todayHighlight: true,
+    			autoclose: true,
+    		});
+    		var time_input=$('input[name="time"]');
+            		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+            		time_input.clockpicker({
 
-	$(document).ready(function(){
-		var date_input=$('input[name="datetime"]'); //our date input has the name "date"
-		var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
-		date_input.datepicker({
-			format: 'dd/mm/yyyy',
-			container: container,
-			todayHighlight: true,
-			autoclose: true,
-		})
-	})
-	document.getElementById("datetime").value= "${repair.datetime}" ;
-    document.getElementById("cost").value= "${repair.cost}";
-    document.getElementById("type").value= "${repair.type}";
-	document.getElementById("textarea").value= "${repair.textarea}";
+            		container: container,
+                     autoclose: true,
+
+            		});
+    	});
+
+       document.getElementById("datetime").value= "${repair.datetime}" ;
+       document.getElementById("time").value= "${repair.time}" ;
+       document.getElementById("cost").value= "${repair.cost}";
+       document.getElementById("type").value= "${repair.type}";
+       document.getElementById("textarea").value= "${repair.textarea}";
 </script>
-
-
-

@@ -34,14 +34,10 @@ public class HomeController {
 
     @RequestMapping(value= "/admin/home", method = RequestMethod.GET)
     public String repairs(Model model){
-       /* Owner owner =userRepository.findByEmailAndPassword("apo.mantzios@gmail.com ","12345");
-        userRepository.delete(owner);*/
-
-        /*Vehicle vehicle = vehicleRepository.findByPlate("sdsf-12");
-        vehicleRepository.delete(vehicle.getId());*/
 
 
         model.addAttribute("repairs",repairService.findAllRepairs());
+
         return "home";
     }
 

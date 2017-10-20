@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class OwnersController {
 
     private static final String OWNERS_LIST="owners";
 
-    private static final String OWNER_FORM="ownerForm";
+    private static final String OWNER_FORM = "ownerForm";
 
     List<OwnerForm> ownerForms;
 
@@ -60,6 +61,23 @@ public class OwnersController {
      */
 
 
+
+    @RequestMapping(value = "admin/owners/edit", method = RequestMethod.GET)
+    public String editOwner(Model model,@RequestParam(name = "id",required = true) long id){
+        Owner owner=accountService.findUser(id);
+        OwnerForm form=OwnerConverter.buildOwnerForm(owner);
+        model.addAttribute(OWNER_FORM,form);
+        return "editOwner";
+    }
+
+    @RequestMapping(value="admin/owners/edit",method = RequestMethod.POST)
+    public String editOwner(@Valid @ModelAttribute(OWNER_FORM) OwnerForm ownerForm ,Model model,@RequestParam(name = "id",required = true) long id){
+
+        ownerForm.setOwnerID(String.valueOf(id));
+        accountService.updateOwner(ownerForm);
+
+        return "redirect:/admin/owners";
+    }
 
 
 }

@@ -1,6 +1,7 @@
 package com.teamnine.carrepairs.controller;
 
 
+import com.teamnine.carrepairs.converter.OwnerConverter;
 import com.teamnine.carrepairs.domain.Owner;
 import com.teamnine.carrepairs.domain.Vehicle;
 import com.teamnine.carrepairs.repository.UserRepository;
@@ -25,11 +26,6 @@ public class HomeController {
     @Autowired
     private RepairService repairService;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private VehicleRepository vehicleRepository;
 
 
     @RequestMapping(value= "/admin/home", method = RequestMethod.GET)
@@ -39,7 +35,6 @@ public class HomeController {
 
         /*Vehicle vehicle = vehicleRepository.findByPlate("sdsf-12");
         vehicleRepository.delete(vehicle.getId());*/
-
 
         model.addAttribute("repairs",repairService.findAllRepairs());
         return "home";

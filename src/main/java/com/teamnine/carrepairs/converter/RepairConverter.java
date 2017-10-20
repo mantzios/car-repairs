@@ -23,7 +23,7 @@ public class RepairConverter {
         Repair repair = new Repair();
         Owner owner = new Owner();
         UserRepository userRepository;
-        if( createRepairForm.getAfm()== null) {
+        if( createRepairForm.getAfm()!= null) {
             long a = Long.parseLong(createRepairForm.getAfm());
             owner = accountService.findOwnerbyAFM(a);
         }

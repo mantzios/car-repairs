@@ -15,10 +15,13 @@ public class OwnerConverter {
         owner.setAccess(ownerForm.getAccess().toUpperCase());
         owner.setAfm(Integer.parseInt(ownerForm.getAfm()));
         owner.setEmail(ownerForm.getEmail());
-        //owner.setOwnerid(Long.parseLong(ownerForm.getOwnerID()));
+        if (ownerForm.getOwnerID()!=null) {
+            owner.setOwnerid(Long.parseLong(ownerForm.getOwnerID()));
+        }
         owner.setLastname(ownerForm.getLastName());
         owner.setName(ownerForm.getFirstName());
         owner.setPassword(ownerForm.getPassword());
+
         return owner;
     }
 
@@ -31,5 +34,9 @@ public class OwnerConverter {
        ownerForm.setLastName(owner.getLastname());
        ownerForm.setOwnerID(Long.toString(owner.getOwnerid()));
        return ownerForm;
+    }
+
+    public void test(){
+        System.out.println();
     }
 }

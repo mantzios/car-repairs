@@ -16,11 +16,10 @@ import java.util.Date;
 
 
 public class RepairConverter {
-    @Autowired
-    private static AccountService accountService;
 
 
-    public Repair buildRepairObject(CreateRepairForm createRepairForm,Owner owner,Vehicle vehicle) {
+
+    public static Repair buildRepairObject(CreateRepairForm createRepairForm,Owner owner,Vehicle vehicle) {
 
         Repair repair = new Repair();
 

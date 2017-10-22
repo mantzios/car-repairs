@@ -1,9 +1,10 @@
 package com.teamnine.carrepairs.controller;
 
+import com.teamnine.carrepairs.Utilities.Utilities;
 import com.teamnine.carrepairs.converter.OwnerConverter;
 import com.teamnine.carrepairs.domain.Owner;
-import com.teamnine.carrepairs.model.CreateRepairForm;
 import com.teamnine.carrepairs.model.OwnerForm;
+import com.teamnine.carrepairs.model.SearchOwnerForm;
 import com.teamnine.carrepairs.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,8 +29,10 @@ public class OwnersController {
     private static final String OWNERS_LIST="owners";
 
     private static final String OWNER_FORM = "ownerForm";
+    private static final String SEARCH_OWNER = "searchOwner";
 
     List<OwnerForm> ownerForms;
+
 
     @RequestMapping(value= "/admin/owners", method = RequestMethod.GET)
     public String owners(Model model) {
@@ -38,6 +41,7 @@ public class OwnersController {
             ownerForms.add(OwnerConverter.buildOwnerForm(owner));
         }
         model.addAttribute(OWNERS_LIST,ownerForms);
+        model.addAttribute(SEARCH_OWNER,new SearchOwnerForm());
         return "owners";
     }
 
@@ -78,6 +82,54 @@ public class OwnersController {
 
         return "redirect:/admin/owners";
     }
+
+    @RequestMapping(value = "admin/owners/search", method = RequestMethod.GET)
+    public String search(Model model, @ModelAttribute(SEARCH_OWNER) SearchOwnerForm searchOwnerForm) {
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        if(Utilities.isEmail(searchOwnerForm.getSearchText())){
+
+           Owner owner=accountService.findOwnerbyEmail( searchOwnerForm.getSearchText().replaceAll(" ",""));
+            if(owner!=null){
+                ownerForms.clear();
+                ownerForms.add(OwnerConverter.buildOwnerForm(owner));
+            }
+            else{
+                stringBuilder.append("Owner with email address: ");
+                stringBuilder.append(searchOwnerForm.getSearchText());
+                stringBuilder.append("not found. ");
+
+            }
+
+        }
+        else if(Utilities.isLong(searchOwnerForm.getSearchText()))
+        {
+            Owner owner=accountService.findOwnerbyAFM(Long.parseLong(searchOwnerForm.getSearchText().replaceAll(" ","")));
+            if(owner!=null) {
+                ownerForms.clear();
+                ownerForms.add(OwnerConverter.buildOwnerForm(owner));
+            }
+            else{
+                stringBuilder.append("Owner with afm number: ");
+                stringBuilder.append(searchOwnerForm.getSearchText());
+                stringBuilder.append(" not found.");
+
+            }
+
+        }
+        else{
+            stringBuilder.append("Please give a valid email or afm");
+
+        }
+
+        model.addAttribute(OWNERS_LIST,ownerForms);
+        model.addAttribute(SEARCH_OWNER,new SearchOwnerForm());
+       model.addAttribute("message", stringBuilder.toString());
+        return "owners";
+    }
+
+
 
 
 }

@@ -20,4 +20,22 @@ public class Utilities {
         calendar.set(Calendar.MINUTE,59);
         return calendar.getTime();
     }
+
+    public static Boolean isEmail(String email){
+        if(email.contains("@")){
+            return true;
+        }
+        else
+            return false;
+
+    }
+    public static Boolean isLong(String l) {
+
+        try {
+            long a = Long.parseLong(l);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
 }

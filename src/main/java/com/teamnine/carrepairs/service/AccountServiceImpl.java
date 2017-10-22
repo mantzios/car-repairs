@@ -45,6 +45,10 @@ public class AccountServiceImpl implements AccountService {
     public Owner findOwnerbyAFM(long afm) {
         return userRepository.findOwnerByAFM(afm);
     }
+    @Override
+    public Owner findOwnerbyEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 
     @Override
     public List<Owner> findAllOwners() {

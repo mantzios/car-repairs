@@ -7,7 +7,7 @@
 <p><div><button type="button" style="margin:10px"  class="btn btn-warning pull-right" id="createBtn" onClick="location.href='/admin/repairs'" >Add New Repair</button>
 </div></p>
 
-<h4 style=" font-weight: bold; font-size: 20px;">Vres ena repair</h4>
+<h4 style=" font-weight: bold; font-size: 20px;">${message!""}</h4>
 <div class="row">
 
 

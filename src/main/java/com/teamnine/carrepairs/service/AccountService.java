@@ -19,4 +19,6 @@ public interface AccountService {
     Owner findUser(long id);
 
     void updateOwner(OwnerForm ownerForm);
+
+    Owner findOwnerbyEmail(String email);
 }

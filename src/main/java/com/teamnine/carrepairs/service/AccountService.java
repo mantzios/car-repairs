@@ -23,6 +23,7 @@ public interface AccountService {
 
     Owner findOwnerbyEmail(String email);
 
-    Pair<List<OwnerForm>, String> searchOwnerBySearchText(String searchText);
+    List<OwnerForm> searchOwnerByEmail(String searchText);
+    List<OwnerForm> searchOwnerByAfm(Long searchText);
 
 }

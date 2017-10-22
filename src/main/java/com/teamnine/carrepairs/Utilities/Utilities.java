@@ -29,7 +29,7 @@ public class Utilities {
             return false;
 
     }
-    public static Boolean isLong(String l) {
+    public static Boolean isAfm(String l) {
 
         try {
             long a = Long.parseLong(l);
@@ -37,5 +37,14 @@ public class Utilities {
             return false;
         }
         return true;
+    }
+
+    public static Boolean isPlate(String plate){
+        if(plate.contains("-")){
+            return true;
+        }
+        else
+            return false;
+
     }
 }

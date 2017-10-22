@@ -13,4 +13,8 @@ public interface VehicleRepository extends CrudRepository<Vehicle,Long> {
     Vehicle findByPlate(String plate);
 
     Set<Vehicle> findByOwnerAfm(int afm);
+
+    List<Vehicle> findAll();
+
+    Vehicle findById(long id);
 }

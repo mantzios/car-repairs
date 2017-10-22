@@ -22,7 +22,7 @@ public interface UserRepository extends CrudRepository<Owner,Long> {
 
     Owner findByOwnerid(long ownerID);
 
-
+    Owner findByEmail(String email);
 
 
 }

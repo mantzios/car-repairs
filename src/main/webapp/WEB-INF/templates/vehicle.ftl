@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <body>
-<@layout flag="owners" >
+<@layout flag="home" >
 <div class="container">
 
-    <p><div><button type="button" style="margin:10px"  class="btn btn-warning pull-right" id="createBtn" onClick="location.href='/admin/owners/new'" >Add New Owner</button>
+    <p><div><button type="button" style="margin:10px"  class="btn btn-warning pull-right" id="createBtn" onClick="location.href='/admin/vehicles/new'" >Add New Vehicle</button>
 </div></p>
 
     <h4 style=" font-weight: bold; font-size: 20px;">Vres ena repair</h4>
     <div class="row">
 
 
-        <form action="/admin/owners/search" method="get" name="searchOwner">
+        <form action="/admin/repairs/search" method="get" name="searchForm">
 
             <div class="form-group ">
 
@@ -33,12 +33,12 @@
 
 
 
-        <form action="/admin/owners/search" method="get" name="searchOwner">
+        <form action="/admin/repairs/search" method="get" name="searchForm">
             <div class="form-group">
 
                 <div class="col-md-2 inputGroupContainer">
                     <div class="col-md-12 input-group ">
-                        <input type="email" class="form-control" name="email" placeholder="test@test.com">
+                        <input type="text" class="form-control" name="vehiclePlate" placeholder="ABC-1234">
                         <span class="input-group-btn">
                                     <button type="submit" class="btn btn-default">Submit</button>
                                     </span>
@@ -58,36 +58,29 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>AFM</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Access</th>
+            <th>Vehicle Plate</th>
+            <th>Model</th>
+            <th>Year</th>
+            <th>Color</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
         </thead>
         <tbody>
-        <#if owners??>
-            <#list owners as item>
+            <#list vehicles as item>
             <tr>
                 <th scope="row">${item?counter}</th>
-                <td>${item.afm}</td>
-                <td>${item.firstName!""}</td>
-                <td>${item.lastName!""}</td>
-                <td>${item.email}</td>
-                <td>${item.access}</td>
+                <td>${item.plate}</td>
+                <td>${item.model}</td>
+                <td>${item.year}</td>
+                <td>${item.color}</td>
 
-                <td>
-                    <a href="/admin/owners/edit?id=${item.ownerID}"><image src="/edit.png" class=" "/></a>
-                </td>
-                <td>
-                    <a href="/admin/repairs/delete/${item.ownerID}"><image src="/delete.png" class=" "/></a>
-                </td>
+                <td><a href="/admin/vehicles/edit?id=${item.id}"><image src="/edit.png" class=" "/></a></td>
+                <td><a href="/admin/repairs/delete/${item.id}" m><image src="/delete.png" class=" "/></a></td>
 
             </tr>
             </#list>
-        </#if>
+
         </tbody>
     </table>
 </div>

@@ -8,17 +8,15 @@ import com.teamnine.carrepairs.model.CreateRepairForm;
 import com.teamnine.carrepairs.repository.UserRepository;
 import com.teamnine.carrepairs.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
+@Controller
 public class RepairConverter {
-    @Autowired
-    private static AccountService accountService;
-
 
     public Repair buildRepairObject(CreateRepairForm createRepairForm,Owner owner,Vehicle vehicle) {
 

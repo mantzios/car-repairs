@@ -16,9 +16,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
-<style>
-    h5 {color: red}
-</style>
+    <style>
+        h5 {color: red}
+    </style>
 </head>
 
 <body>
@@ -26,14 +26,14 @@
 
     <h3 style="color: green; font-weight: bold; font-size: 20px;">${message!""}</h3>
 
-    <form class="well form-horizontal" action="/admin/owners/new" method="post" id="ownerForm" name="ownerForm">
+    <form class="well form-horizontal" action="/admin/vehicles/edit?id=${vehicleForm.vehicleID}" method="post" id="vehicleForm" name="vehicleForm">
 
         <div class="form-group">
-            <@spring.bind "ownerForm.firstName"/>
-            <label class="col-md-4 control-label">First Name</label>
+            <@spring.bind "vehicleForm.plate"/>
+            <label class="col-md-4 control-label">Vehicle Plate</label>
             <div class="col-md-4 selectContainer">
                 <div class="col-md-12 input-group">
-                    <input  name="firstName" id="firstName"  placeholder="First Name" class="form-control"  type="text">
+                    <input  name="plate" id="plate" value="${vehicleForm.plate!""}" placeholder="Vehicle Plate" class="form-control"  type="text">
                 </div>
                 <#list spring.status.errorMessages as error>
                     <h5>${error}</h5>
@@ -43,11 +43,11 @@
 
 
         <div class="form-group">
-            <@spring.bind "ownerForm.lastName"/>
-            <label class="col-md-4 control-label">Last Name</label>
+            <@spring.bind "vehicleForm.model"/>
+            <label class="col-md-4 control-label">Model</label>
             <div class="col-md-4 inputGroupContainer">
                 <div class="col-md-12 input-group">
-                    <input  name="lastName" id="lastName"  placeholder="Last Name" class="form-control"  type="text">
+                    <input  name="model" id="model" value="${vehicleForm.model!""}" placeholder="Model" class="form-control"  type="text">
                 </div>
                 <#list spring.status.errorMessages as error>
                     <h5>${error}</h5>
@@ -56,11 +56,11 @@
         </div>
 
         <div class="form-group">
-            <@spring.bind "ownerForm.afm"/>
-            <label class="col-md-4 control-label">Afm</label>
+            <@spring.bind "vehicleForm.color"/>
+            <label class="col-md-4 control-label">Color</label>
             <div class="col-md-4 inputGroupContainer">
                 <div class="col-md-12 input-group">
-                    <input  name="afm" id="afm" placeholder="afm"  class="form-control"  type="text">
+                    <input  name="color" id="color" value="${vehicleForm.color!""}" placeholder="Color"  class="form-control"  type="text">
                 </div>
                 <#list spring.status.errorMessages as error>
                     <h5>${error}</h5>
@@ -69,11 +69,11 @@
         </div>
 
         <div class="form-group">
-            <@spring.bind "ownerForm.access"/>
-            <label class="col-md-4 control-label">Access</label>
+            <@spring.bind "vehicleForm.year"/>
+            <label class="col-md-4 control-label">Year</label>
             <div class="col-md-4 inputGroupContainer">
                 <div class="col-md-12 input-group ">
-                    <input name="access" id="access" placeholder="Access"  class="form-control"  type="text">
+                    <input name="year" id="year" placeholder="Year" value="${vehicleForm.year!""}" class="form-control"  type="text">
                 </div>
                 <#list spring.status.errorMessages as error>
                     <h5>${error}</h5>
@@ -81,36 +81,11 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <@spring.bind "ownerForm.email"/>
-            <label class="col-md-4 control-label">Email</label>
-            <div class="col-md-4 inputGroupContainer">
-                <div class="col-md-12 input-group">
-                    <input name="email" id="email" placeholder="Email" class="form-control"  type="email">
-                </div>
-                <#list spring.status.errorMessages as error>
-                    <h5>${error}</h5>
-                </#list>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <@spring.bind "ownerForm.password"/>
-            <label class="col-md-4 control-label">Password</label>
-            <div class="col-md-4 inputGroupContainer">
-                <div class="col-md-12 input-group ">
-                    <input name="password" id="password" placeholder="Access"  class="form-control"  type="password">
-                </div>
-                <#list spring.status.errorMessages as error>
-                    <h5>${error}</h5>
-                </#list>
-            </div>
-        </div>
 
         <div class="form-group">
             <label class="col-md-4 control-label"></label>
             <div class="col-md-4"><br>
-                <button type="submit" class="btn pull-right btn-warning" >Add Repair</button>
+                <button type="submit" class="btn pull-right btn-warning" >Add Vehicle</button>
             </div>
         </div>
 
@@ -121,5 +96,3 @@
 </@layout>
 </body>
 </html>
-
-

@@ -4,6 +4,8 @@ import com.teamnine.carrepairs.converter.OwnerConverter;
 import com.teamnine.carrepairs.domain.Owner;
 import com.teamnine.carrepairs.model.CreateRepairForm;
 import com.teamnine.carrepairs.model.OwnerForm;
+import com.teamnine.carrepairs.model.SearchFormOwner;
+import com.teamnine.carrepairs.model.SearchFormRepair;
 import com.teamnine.carrepairs.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @Controller
@@ -29,15 +30,14 @@ public class OwnersController {
 
     private static final String OWNER_FORM = "ownerForm";
 
-    List<OwnerForm> ownerForms;
+    private static final String SEARCH_OWNER="searchOwner";
+
+    private Set<OwnerForm> ownerSet;
 
     @RequestMapping(value= "/admin/owners", method = RequestMethod.GET)
     public String owners(Model model) {
-        ownerForms = new ArrayList<>();
-        for(Owner owner:accountService.findAllOwners()){
-            ownerForms.add(OwnerConverter.buildOwnerForm(owner));
-        }
-        model.addAttribute(OWNERS_LIST,ownerForms);
+
+        model.addAttribute(OWNERS_LIST,accountService.findAllOwners());
         return "owners";
     }
 
@@ -50,7 +50,10 @@ public class OwnersController {
     @RequestMapping(value = "admin/owners/new",method = RequestMethod.POST)
     public String createOwner(Model model,@Valid @ModelAttribute(OWNER_FORM)
                             OwnerForm ownerForm, BindingResult bindingResult){
-
+        if (bindingResult.hasErrors()){
+            model.addAttribute(OWNER_FORM,ownerForm);
+            return "ownerForm";
+        }
         Owner owner = OwnerConverter.buildOwnerObject(ownerForm);
         accountService.insertUser(owner);
         return "redirect:/admin/owners";
@@ -71,13 +74,31 @@ public class OwnersController {
     }
 
     @RequestMapping(value="admin/owners/edit",method = RequestMethod.POST)
-    public String editOwner(@Valid @ModelAttribute(OWNER_FORM) OwnerForm ownerForm ,Model model,@RequestParam(name = "id",required = true) long id){
+    public String editOwner(@Valid @ModelAttribute(OWNER_FORM) OwnerForm ownerForm,BindingResult bindingResult,Model model,
+                            @RequestParam(name = "id",required = true) long id){
 
         ownerForm.setOwnerID(String.valueOf(id));
+        if (bindingResult.hasErrors()){
+            model.addAttribute(OWNER_FORM,ownerForm);
+            return "editOwner";
+        }
         accountService.updateOwner(ownerForm);
 
         return "redirect:/admin/owners";
     }
 
+    /*@RequestMapping(value = "admin/owners/search", method = RequestMethod.GET)
+    public String search(Model model, @ModelAttribute(SEARCH_OWNER) SearchFormOwner searchFormOwner) {
+        ownerSet = new HashSet<>();
+        if (searchFormOwner.getAfm()!= null) {
+            ownerSet.add(OwnerConverter.buildOwnerForm(accountService.findOwnerbyAFM(Long.parseLong(searchFormOwner.getAfm()))));
+        }
+        if (searchFormOwner.getEmail() != null) {
+            // call service to search  by vehicle plate
+           ownerSet.add(accountService.searchOwnerByEmail(searchFormOwner.getEmail()));
+        }
+        model.addAttribute(OWNERS_LIST, ownerSet);
+        return "owners";
+    }*/
 
 }

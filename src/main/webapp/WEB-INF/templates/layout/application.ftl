@@ -20,11 +20,16 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Booo</a>
     </div>
+
     <ul class="nav navbar-nav">
       <li class="<#if flag=="home">active</#if>"><a href="/admin/home">Home</a></li>
       <li class="<#if flag=="owners">active</#if>"><a href="/admin/owners">Owners</a></li>
       <li class="<#if flag=="repairs">active</#if>"><a href="/admin/repairs">Repairs</a></li>
+        <li class="<#if flag=="vehicles">active</#if>"><a href="/admin/vehicles">Vehicles</a></li>
     </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li class="<#if flag=="home">active</#if>"><a href="/logout">Log out</a></li>
+      </ul>
   </div>
   </div>
 </nav>

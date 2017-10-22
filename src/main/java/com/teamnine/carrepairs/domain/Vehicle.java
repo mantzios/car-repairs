@@ -19,8 +19,8 @@ public class Vehicle {
     @Column
     private String model;
 
-    @Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Date year;
+    @Column
+    private String year;
 
     @Column
     private String color;
@@ -73,11 +73,11 @@ public class Vehicle {
         this.model = model;
     }
 
-    public Date getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Date year) {
+    public void setYear(String year) {
         this.year = year;
     }
 

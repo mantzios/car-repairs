@@ -47,8 +47,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<Owner> findAllOwners() {
-        return userRepository.findAll();
+    public List<OwnerForm> findAllOwners() {
+        List<Owner> list=userRepository.findAll();
+        List<OwnerForm> ownerList=new ArrayList<>();
+        for(Owner owner:list){
+            ownerList.add(OwnerConverter.buildOwnerForm(owner));
+        }
+        return ownerList;
     }
 
     @Override
@@ -75,6 +80,11 @@ public class AccountServiceImpl implements AccountService {
         owner.setRepair(new HashSet<>(repairList));
         owner.setVehicle(vehicleList);
         userRepository.save(owner);
+    }
+
+    @Override
+    public OwnerForm searchOwnerByEmail(String email) {
+        return OwnerConverter.buildOwnerForm(userRepository.findByEmail(email));
     }
 
 

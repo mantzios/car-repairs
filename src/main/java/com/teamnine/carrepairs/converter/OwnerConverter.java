@@ -33,6 +33,7 @@ public class OwnerConverter {
        ownerForm.setFirstName(owner.getName());
        ownerForm.setLastName(owner.getLastname());
        ownerForm.setOwnerID(Long.toString(owner.getOwnerid()));
+       ownerForm.setPassword(owner.getPassword());
        return ownerForm;
     }
 

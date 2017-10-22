@@ -14,13 +14,11 @@
             <th>Status</th>
             <th>Cost</th>
             <th>Description</th>
-            <th>Edit</th>
-            <th>Delete</th>
         </tr>
         </thead>
         <tbody>
-            <#if repairs??>
-            <#list repairs as item>
+            <#if repairsOwners??>
+            <#list repairsOwners as item>
             <tr>
                 <th scope="row">${item?counter}</th>
                 <td>${item.datetime}</td>

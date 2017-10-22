@@ -21,5 +21,7 @@ public interface RepairRepository extends CrudRepository<Repair,Long>{
     @Query(value = "select * from repair INNER JOIN owners ON repair.owner_id=owners.owner_id where  afm_number=:afm",nativeQuery = true)
     List<Repair> findRepairByOwnerAFM(@Param("afm")long afm);
 
+    List<Repair> findRepairsByOwnerEmail(String email);
+
     List<Repair> findAllByDatetimeBetween(Date start,Date end);
 }

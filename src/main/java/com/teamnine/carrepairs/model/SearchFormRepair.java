@@ -1,6 +1,7 @@
 package com.teamnine.carrepairs.model;
 
 public class SearchFormRepair {
+
     private long afm;
     private String vehiclePlate;
 

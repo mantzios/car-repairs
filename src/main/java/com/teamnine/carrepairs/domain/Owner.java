@@ -112,5 +112,19 @@ public class Owner implements Serializable {
         this.lastname = lastname;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Owner owner = (Owner) o;
+
+        return ownerid == owner.ownerid;
+    }
+
+    @Override
+    public int hashCode() {
+        return (int) (ownerid ^ (ownerid >>> 32));
+    }
 }
 

@@ -12,11 +12,13 @@ public interface AccountService {
 
     Owner findOwnerbyAFM(long afm);
 
-    List<Owner> findAllOwners();
+    List<OwnerForm> findAllOwners();
 
     void insertUser(Owner owner);
 
     Owner findUser(long id);
 
     void updateOwner(OwnerForm ownerForm);
+
+    OwnerForm searchOwnerByEmail(String email);
 }

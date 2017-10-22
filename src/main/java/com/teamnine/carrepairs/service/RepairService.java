@@ -23,4 +23,6 @@ public interface RepairService {
     List<Repair> searchByDate(Date date);
 
     void updateRepair(Repair repair);
+
+    List<Repair> searchByEmail(String email);
 }

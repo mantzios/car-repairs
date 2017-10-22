@@ -68,4 +68,9 @@ public class RepairServiceImpl implements RepairService {
     public void updateRepair(Repair repair) {
         repairRepository.save(repair);
     }
+
+    @Override
+    public List<Repair> searchByEmail(String email) {
+        return repairRepository.findRepairsByOwnerEmail(email);
+    }
 }

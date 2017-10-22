@@ -7,7 +7,6 @@ import com.teamnine.carrepairs.domain.Repair;
 import com.teamnine.carrepairs.domain.Vehicle;
 import com.teamnine.carrepairs.exception.LoginException;
 import com.teamnine.carrepairs.model.OwnerForm;
-import com.teamnine.carrepairs.repository.RepairRepository;
 import com.teamnine.carrepairs.repository.UserRepository;
 import com.teamnine.carrepairs.repository.VehicleRepository;
 import javafx.util.Pair;
@@ -125,7 +124,7 @@ public class AccountServiceImpl implements AccountService {
 
         }
 
-        return new Pair<List<OwnerForm>, String>(ownerForms, stringBuilder.toString());
+        return new Pair< List<OwnerForm>, String >(ownerForms, stringBuilder.toString());
     }
 
 

@@ -1,14 +1,15 @@
 package com.teamnine.carrepairs.service;
 
+import com.teamnine.carrepairs.Utilities.Utilities;
 import com.teamnine.carrepairs.converter.OwnerConverter;
 import com.teamnine.carrepairs.domain.Owner;
 import com.teamnine.carrepairs.domain.Repair;
 import com.teamnine.carrepairs.domain.Vehicle;
 import com.teamnine.carrepairs.exception.LoginException;
 import com.teamnine.carrepairs.model.OwnerForm;
-import com.teamnine.carrepairs.repository.RepairRepository;
 import com.teamnine.carrepairs.repository.UserRepository;
 import com.teamnine.carrepairs.repository.VehicleRepository;
+import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,10 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public Owner findOwnerbyAFM(long afm) {
         return userRepository.findOwnerByAFM(afm);
+    }
+    @Override
+    public Owner findOwnerbyEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Override
@@ -85,6 +90,51 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public OwnerForm searchOwnerByEmail(String email) {
         return OwnerConverter.buildOwnerForm(userRepository.findByEmail(email));
+    }
+
+
+
+    public Pair<List<OwnerForm>, String> searchOwnerBySearchText(String searchText) {
+        StringBuilder stringBuilder = new StringBuilder();
+        List<OwnerForm> ownerForms= new ArrayList<>();
+        Owner owner;
+
+        if(Utilities.isEmail(searchText)){
+
+            owner=findOwnerbyEmail( searchText);
+            if(owner!=null){
+                ownerForms.clear();
+                ownerForms.add(OwnerConverter.buildOwnerForm(owner));
+            }
+            else{
+                stringBuilder.append("Owner with email address: ");
+                stringBuilder.append(searchText);
+                stringBuilder.append("not found. ");
+
+            }
+
+        }
+        else if(Utilities.isLong(searchText))
+        {
+            owner=findOwnerbyAFM(Long.parseLong(searchText));
+            if(owner!=null) {
+                ownerForms.clear();
+                ownerForms.add(OwnerConverter.buildOwnerForm(owner));
+            }
+            else{
+                stringBuilder.append("Owner with afm number: ");
+                stringBuilder.append(searchText);
+                stringBuilder.append(" not found.");
+
+            }
+
+        }
+        else{
+            stringBuilder.append("Please give a valid email or afm");
+
+        }
+
+        return new Pair< List<OwnerForm>, String >(ownerForms, stringBuilder.toString());
     }
 
 

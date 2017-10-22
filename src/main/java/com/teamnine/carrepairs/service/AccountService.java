@@ -2,6 +2,7 @@ package com.teamnine.carrepairs.service;
 
 import com.teamnine.carrepairs.domain.Owner;
 import com.teamnine.carrepairs.model.OwnerForm;
+import javafx.util.Pair;
 import org.springframework.security.core.AuthenticationException;
 
 import java.util.List;
@@ -20,5 +21,8 @@ public interface AccountService {
 
     void updateOwner(OwnerForm ownerForm);
 
-    OwnerForm searchOwnerByEmail(String email);
+    Owner findOwnerbyEmail(String email);
+
+    Pair<List<OwnerForm>, String> searchOwnerBySearchText(String searchText);
+
 }

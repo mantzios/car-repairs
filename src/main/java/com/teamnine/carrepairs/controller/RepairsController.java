@@ -40,8 +40,7 @@ public class RepairsController {
     private AccountService accountService;
 
 
-    @Autowired
-    private RepairConverter repairConverter;
+
     @Autowired
     private VehicleRepository vehicleRepository;
 
@@ -67,7 +66,7 @@ public class RepairsController {
             logger.error(String.format("%s Validation Errors present: ", bindingResult.getErrorCount()));
             return "repairs";
         }
-        Repair repair = repairConverter.buildRepairObject(createRepairForm,
+        Repair repair = RepairConverter.buildRepairObject(createRepairForm,
                         accountService.findOwnerbyAFM(Long.parseLong(createRepairForm.getAfm())),
                         vehicleRepository.findByPlate(createRepairForm.getPlate_num()));
 

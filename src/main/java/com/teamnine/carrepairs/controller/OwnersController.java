@@ -2,11 +2,12 @@ package com.teamnine.carrepairs.controller;
 
 import com.teamnine.carrepairs.converter.OwnerConverter;
 import com.teamnine.carrepairs.domain.Owner;
-import com.teamnine.carrepairs.model.CreateRepairForm;
 import com.teamnine.carrepairs.model.OwnerForm;
 import com.teamnine.carrepairs.model.SearchFormOwner;
 import com.teamnine.carrepairs.model.SearchFormRepair;
+import com.teamnine.carrepairs.model.SearchOwnerForm;
 import com.teamnine.carrepairs.service.AccountService;
+import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,14 +30,15 @@ public class OwnersController {
     private static final String OWNERS_LIST="owners";
 
     private static final String OWNER_FORM = "ownerForm";
+    private static final String SEARCH_OWNER = "searchOwner";
 
-    private static final String SEARCH_OWNER="searchOwner";
+    List<OwnerForm> ownerForms;
+    Pair<List<OwnerForm>, String> pair;
 
-    private Set<OwnerForm> ownerSet;
 
     @RequestMapping(value= "/admin/owners", method = RequestMethod.GET)
     public String owners(Model model) {
-
+        model.addAttribute(SEARCH_OWNER,new SearchOwnerForm());
         model.addAttribute(OWNERS_LIST,accountService.findAllOwners());
         return "owners";
     }
@@ -87,18 +89,19 @@ public class OwnersController {
         return "redirect:/admin/owners";
     }
 
-    /*@RequestMapping(value = "admin/owners/search", method = RequestMethod.GET)
-    public String search(Model model, @ModelAttribute(SEARCH_OWNER) SearchFormOwner searchFormOwner) {
-        ownerSet = new HashSet<>();
-        if (searchFormOwner.getAfm()!= null) {
-            ownerSet.add(OwnerConverter.buildOwnerForm(accountService.findOwnerbyAFM(Long.parseLong(searchFormOwner.getAfm()))));
-        }
-        if (searchFormOwner.getEmail() != null) {
-            // call service to search  by vehicle plate
-           ownerSet.add(accountService.searchOwnerByEmail(searchFormOwner.getEmail()));
-        }
-        model.addAttribute(OWNERS_LIST, ownerSet);
+    @RequestMapping(value = "admin/owners/search", method = RequestMethod.GET)
+    public String search(Model model, @ModelAttribute(SEARCH_OWNER) SearchOwnerForm searchOwnerForm) {
+
+         pair= accountService.searchOwnerBySearchText(searchOwnerForm.getSearchText().replaceAll(" ",""));
+
+         model.addAttribute(OWNERS_LIST,pair.getKey());
+         model.addAttribute(SEARCH_OWNER,new SearchOwnerForm());
+         model.addAttribute("message", pair.getValue());
+
         return "owners";
-    }*/
+    }
+
+
+
 
 }

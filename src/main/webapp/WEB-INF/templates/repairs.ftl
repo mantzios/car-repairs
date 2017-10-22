@@ -50,8 +50,8 @@
                 <div class="col-md-4">
                     <div class="col-md-12 input-group clockpicker">
                         <div class="input-group-addon">
-                            <i class="glyphicon glyphicon-time">
-                            </i>
+                             <i class="fa fa-clock-o" style="font-size:16px">
+                             </i>
                         </div>
                             <input type="text" class="form-control" id="time" name="time" placeholder="select time..">
                     </div>

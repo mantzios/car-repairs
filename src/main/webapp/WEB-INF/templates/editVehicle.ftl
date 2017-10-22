@@ -81,6 +81,18 @@
             </div>
         </div>
 
+        <div hidden="hidden" class="form-group">
+            <@spring.bind "vehicleForm.ownerAfm"/>
+            <label class="col-md-4 control-label">Year</label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="col-md-12 input-group ">
+                    <input name="ownerAfm" id="ownerAfm" value="${vehicleForm.ownerAfm!"123456789"}" placeholder="Year" hidden="hidden" class="form-control"  type="text">
+                </div>
+                <#list spring.status.errorMessages as error>
+                    <h5>${error}</h5>
+                </#list>
+            </div>
+        </div>
 
         <div class="form-group">
             <label class="col-md-4 control-label"></label>

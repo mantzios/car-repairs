@@ -40,7 +40,10 @@ public class VehicleController {
     @RequestMapping(value="/admin/vehicles/new",method = RequestMethod.POST)
     public String addVehicle(Model model, @Valid @ModelAttribute(VEHICLE_FORM)
             VehicleForm vehicleForm, BindingResult bindingResult){
-
+        if (bindingResult.hasErrors()){
+            model.addAttribute(VEHICLE_FORM,vehicleForm);
+            return "vehicleForm";
+        }
         vehicleService.insertVehicle(vehicleForm);
         return "redirect:/admin/vehicles";
     }
@@ -57,12 +60,12 @@ public class VehicleController {
                             @RequestParam(name = "id",required = true) long id){
 
         vehicleForm.setVehicleID(String.valueOf(id));
-        /*if (bindingResult.hasErrors()){
-            model.addAttribute(OWNER_FORM,ownerForm);
-            return "editOwner";
-        }*/
-        vehicleService.editVehicle(vehicleForm);
+        if (bindingResult.hasErrors()){
+            model.addAttribute(VEHICLE_FORM,vehicleForm);
+            return "editVehicle";
+        }
 
-        return "redirect:/admin/owners";
+        vehicleService.editVehicle(vehicleForm);
+        return "redirect:/admin/vehicles";
     }
 }

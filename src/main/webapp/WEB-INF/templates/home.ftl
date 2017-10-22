@@ -63,6 +63,8 @@
         <th>Status</th>
         <th>Cost</th>
         <th>Description</th>
+        <th>Vehicle Plate</th>
+        <th>Owner</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
@@ -76,7 +78,8 @@
            <td>${item.status}</td>
            <td>${item.cost}</td>
            <td>${item.textarea}</td>
-
+           <td>${item.vehicle.plate}</td>
+           <td>${item.owner.lastname!""}</td>
            <td><a href="/admin/edit/repair?id=${item.id}"><image src="/edit.png" class=" "/></a></td>
            <td><a href="/admin/repairs/delete/${item.id}" m><image src="/delete.png" class=" "/></a></td>
 

@@ -6,8 +6,6 @@ import javax.validation.constraints.Pattern;
 
 public class OwnerForm {
 
-    private static final String USERNAME_PATTERN = "^[a-zA-Z0-9]*$";
-
     private static final String PASSWORD_PATTERN = "^[a-zA-Z0-9@#$%^&]*$";
 
     private static final String CHARACTERS_PATTERN = "^[a-zA-Z ]*$";

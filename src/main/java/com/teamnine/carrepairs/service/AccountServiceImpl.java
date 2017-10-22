@@ -87,10 +87,6 @@ public class AccountServiceImpl implements AccountService {
         userRepository.save(owner);
     }
 
-    @Override
-    public OwnerForm searchOwnerByEmail(String email) {
-        return OwnerConverter.buildOwnerForm(userRepository.findByEmail(email));
-    }
 
 
 

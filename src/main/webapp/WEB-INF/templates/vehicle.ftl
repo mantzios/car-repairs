@@ -1,57 +1,42 @@
 <!DOCTYPE html>
 <html>
+<head>
+
+<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+</head>
 <body>
-<@layout flag="home" >
+<@layout flag="vehicles" >
+<#import "/spring.ftl" as spring/>
 <div class="container">
 
-    <p><div><button type="button" style="margin:10px"  class="btn btn-warning pull-right" id="createBtn" onClick="location.href='/admin/vehicles/new'" >Add New Vehicle</button>
-</div></p>
+   <div class="row">
+       <button type="button" style="margin:10px"  class="btn btn-warning pull-right" id="createBtn" onClick="location.href='/admin/owners/new'" ><i class="fa fa-plus"></i>  Add New Vehicle</button>
 
-    <h4 style=" font-weight: bold; font-size: 20px;">Vres ena repair</h4>
-    <div class="row">
+   </div>
 
+   <div class="row ">
+                   <form  class="form-inline" action="/admin/vehicle/search" method="get" name="searchVehicle" id="searchVehicle">
 
-        <form action="/admin/repairs/search" method="get" name="searchForm">
-
-            <div class="form-group ">
-
-                <div class="col-md-2 inputGroupContainer">
-                    <div class="col-md-12 input-group ">
-                        <input  type="text" class="form-control" name="afm" placeholder="Enter afm">
-                        <span class="input-group-btn">
-                                       <button type="submit" class="btn btn-default">Submit</button>
-                                    </span>
-
-
-                    </div>
-
-
-                </div>
-            </div>
-
-        </form>
+                              <div class="form-group pull-right">
+                              <@spring.bind "searchVehicle.searchText"/>
+                              <div class="col-lg-12 inputGroupContainer">
+                                <div class="col-md-12 input-group   ">
+                                      <input  type="text" class="form-control" id= "searchText" name="searchText" placeholder="Search by AFM or Plate">
+                                         <span class="input-group-btn">
+                                           <button type="submit" class="btn btn-default pull-right "><i class="fa fa-search"></i></button>
+                                         </span>
+                                  </div>
+                                </div>
+                              </div>
+                    </form>
 
 
-
-        <form action="/admin/repairs/search" method="get" name="searchForm">
-            <div class="form-group">
-
-                <div class="col-md-2 inputGroupContainer">
-                    <div class="col-md-12 input-group ">
-                        <input type="text" class="form-control" name="vehiclePlate" placeholder="ABC-1234">
-                        <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-default">Submit</button>
-                                    </span>
-                    </div>
-
-
-                </div>
-            </div>
-
-        </form>
-    </div>
+   </div>
 </div>
-
+<div class="container">
+<h4 style=" font-weight: bold; font-size: 18px; color: red;">${message!""}</h4>
+</div>
 <div class="container" style="margin-top:50px">
 
     <table class="table table-hover">

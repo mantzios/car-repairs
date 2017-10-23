@@ -90,48 +90,24 @@ public class AccountServiceImpl implements AccountService {
 
 
 
-    public Pair<List<OwnerForm>, String> searchOwnerBySearchText(String searchText) {
-        StringBuilder stringBuilder = new StringBuilder();
+
+    public List<OwnerForm> searchOwnerByEmail(String searchText){
         List<OwnerForm> ownerForms= new ArrayList<>();
-        Owner owner;
-
-        if(Utilities.isEmail(searchText)){
-
-            owner=findOwnerbyEmail( searchText);
-            if(owner!=null){
-                ownerForms.clear();
-                ownerForms.add(OwnerConverter.buildOwnerForm(owner));
-            }
-            else{
-                stringBuilder.append("Owner with email address: ");
-                stringBuilder.append(searchText);
-                stringBuilder.append("not found. ");
-
-            }
-
+        Owner owner=findOwnerbyEmail( searchText);
+        if(owner!=null){
+            ownerForms.add(OwnerConverter.buildOwnerForm(owner));
         }
-        else if(Utilities.isLong(searchText))
-        {
-            owner=findOwnerbyAFM(Long.parseLong(searchText));
-            if(owner!=null) {
-                ownerForms.clear();
-                ownerForms.add(OwnerConverter.buildOwnerForm(owner));
-            }
-            else{
-                stringBuilder.append("Owner with afm number: ");
-                stringBuilder.append(searchText);
-                stringBuilder.append(" not found.");
-
-            }
-
-        }
-        else{
-            stringBuilder.append("Please give a valid email or afm");
-
-        }
-
-        return new Pair< List<OwnerForm>, String >(ownerForms, stringBuilder.toString());
+        return ownerForms;
     }
 
+    public List<OwnerForm> searchOwnerByAfm(Long searchText){
+        List<OwnerForm> ownerForms= new ArrayList<>();
+        Owner owner=findOwnerbyAFM( searchText);
+        if(owner!=null){
+            ownerForms.add(OwnerConverter.buildOwnerForm(owner));
+        }
+        return ownerForms;
+
+    }
 
 }

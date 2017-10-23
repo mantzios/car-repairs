@@ -1,8 +1,9 @@
 package com.teamnine.carrepairs.controller;
 
+import com.teamnine.carrepairs.Utilities.Utilities;
 import com.teamnine.carrepairs.converter.VehicleConverter;
 import com.teamnine.carrepairs.domain.Vehicle;
-import com.teamnine.carrepairs.model.OwnerForm;
+import com.teamnine.carrepairs.model.SearchForm;
 import com.teamnine.carrepairs.model.VehicleForm;
 import com.teamnine.carrepairs.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,19 +16,24 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class VehicleController {
 
     private static final String VEHICLE_LIST="vehicles";
     private static final String VEHICLE_FORM="vehicleForm";
+    private static final String SEARCH_VEHICLE="searchVehicle";
 
     @Autowired
     private VehicleService vehicleService;
 
+    List<Vehicle> vehicles;
     @RequestMapping(value = "/admin/vehicles",method = RequestMethod.GET)
     public String vehicleHome(Model model){
         model.addAttribute(VEHICLE_LIST,vehicleService.findAll());
+        model.addAttribute(SEARCH_VEHICLE,new SearchForm());
+
         return "vehicle";
     }
 
@@ -68,4 +74,32 @@ public class VehicleController {
         vehicleService.editVehicle(vehicleForm);
         return "redirect:/admin/vehicles";
     }
+
+    @RequestMapping(value = "admin/vehicle/search", method = RequestMethod.GET)
+    public String search(Model model, @ModelAttribute(SEARCH_VEHICLE) SearchForm searchForm) {
+        String message="";
+        String searchText = searchForm.getSearchText().replaceAll(" ", "");
+
+        if (Utilities.isPlate(searchText)) {
+            vehicles = vehicleService.searchVelicleByPlate(searchText);
+            if (vehicles.isEmpty()) {
+                message="Vehicle with plate num: ".concat(searchText).concat(" not found. ");
+
+            }
+        }
+        else if (Utilities.isAfm(searchText)) {
+            vehicles = vehicleService.searchVelicleByAfm(searchText);
+            if (vehicles.isEmpty()) {
+                message="Vehicle of owner with vat num: ".concat(searchText).concat(" not found. ");
+            }
+        }
+        else {message="Please give a valid VAT num or Email ";}
+
+        model.addAttribute(VEHICLE_LIST,vehicles);
+        model.addAttribute(SEARCH_VEHICLE,new SearchForm());
+        model.addAttribute("message", message);
+
+        return "vehicle";
+    }
+
 }

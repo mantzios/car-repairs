@@ -1,6 +1,6 @@
 package com.teamnine.carrepairs.model;
 
-public class SearchOwnerForm {
+public class SearchForm {
 
 
     private String searchText;

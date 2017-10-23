@@ -1,7 +1,16 @@
 <!DOCTYPE html>
-<html>
+ <html>
+ <@layout flag="home" >
+ <#import "/spring.ftl" as spring/>
+ <head>
+
+
+ <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+
+ </head>
 <body>
-<@layout flag="home" >
+
 <div class="container">
 
 <p><div><button type="button" style="margin:10px"  class="btn btn-warning pull-right" id="createBtn" onClick="location.href='/admin/repairs'" >Add New Repair</button>
@@ -21,12 +30,8 @@
                                 <span class="input-group-btn">
                                        <button type="submit" class="btn btn-default">Submit</button>
                                     </span>
-
-
-                             </div>
-
-
-                        </div>
+                          </div>
+                    </div>
                   </div>
 
 </form>
@@ -51,7 +56,39 @@
 </form>
 </div>
 </div>
+<div class="container">
+<form class="form-inline pull-right" action="/admin/home/search" method="get" id="searchRepairByDate" name="searchRepairByDate">
+ <@spring.bind "searchRepairByDate.dateStart"/>
+            <div class="form-group ">
 
+                    <div class="col-md-12 input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                        </div>
+                        <input class="form-control" id="dateStart" name="dateStart" type="date"/>
+
+                </div>
+
+            </div>
+            <div class="form-group">
+                <@spring.bind "searchRepairByDate.dateEnd"/>
+                <div class="col-md-1">
+                    <div class="col-md-12 input-group">
+
+                        <input class="form-control" id="dateEnd" name="dateEnd"  type="date"/>
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default pull-right "><i class="fa fa-search"></i></button>
+                         </span>
+                    </div>
+                </div>
+                <#list spring.status.errorMessages as error>
+                <span>${error}</span>
+                </#list>
+            </div>
+
+        </form>
+</div>
 <div class="container" style="margin-top:50px">
 
 <table class="table table-hover">

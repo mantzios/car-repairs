@@ -3,17 +3,17 @@ package com.teamnine.carrepairs.controller;
 import com.teamnine.carrepairs.Utilities.Utilities;
 import com.teamnine.carrepairs.converter.VehicleConverter;
 import com.teamnine.carrepairs.domain.Vehicle;
+import com.teamnine.carrepairs.exception.UserNotFoundException;
+import com.teamnine.carrepairs.exception.VehicleNotFoundException;
 import com.teamnine.carrepairs.model.SearchForm;
 import com.teamnine.carrepairs.model.VehicleForm;
 import com.teamnine.carrepairs.service.VehicleService;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -24,6 +24,8 @@ public class VehicleController {
     private static final String VEHICLE_LIST="vehicles";
     private static final String VEHICLE_FORM="vehicleForm";
     private static final String SEARCH_VEHICLE="searchVehicle";
+    private static final String ERROR_VEHICLE="error";
+    private static final String ERROR_USER="errorUser";
 
     @Autowired
     private VehicleService vehicleService;
@@ -45,7 +47,7 @@ public class VehicleController {
 
     @RequestMapping(value="/admin/vehicles/new",method = RequestMethod.POST)
     public String addVehicle(Model model, @Valid @ModelAttribute(VEHICLE_FORM)
-            VehicleForm vehicleForm, BindingResult bindingResult){
+            VehicleForm vehicleForm, BindingResult bindingResult) throws UserNotFoundException {
         if (bindingResult.hasErrors()){
             model.addAttribute(VEHICLE_FORM,vehicleForm);
             return "vehicleForm";
@@ -55,7 +57,7 @@ public class VehicleController {
     }
 
     @RequestMapping(value = "/admin/vehicles/edit",method = RequestMethod.GET)
-    public String editVehicle(Model model,@RequestParam(name = "id",required = true) long id){
+    public String editVehicle(Model model,@RequestParam(name = "id",required = true) long id) throws VehicleNotFoundException {
         Vehicle vehicle=vehicleService.findById(id);
         model.addAttribute(VEHICLE_FORM, VehicleConverter.buildVehicleForm(vehicle));
         return "editVehicle";
@@ -100,6 +102,19 @@ public class VehicleController {
         model.addAttribute("message", message);
 
         return "vehicle";
+    }
+
+    @ExceptionHandler(VehicleNotFoundException.class)
+    public String VehicleException(Model model){
+        model.addAttribute(ERROR_VEHICLE,"Vehicle Not found");
+        return "editVehicle";
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public String UserException(Model model){
+        model.addAttribute(ERROR_USER,"There is no user with this afm");
+        model.addAttribute(VEHICLE_FORM,new VehicleForm());
+        return "vehicleForm";
     }
 
 }

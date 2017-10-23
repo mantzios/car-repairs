@@ -24,8 +24,9 @@
 <body>
 <div class="container">
 
-    <h3 style="color: green; font-weight: bold; font-size: 20px;">${message!""}</h3>
-
+    <h2 style="color: green; font-weight: bold; font-size: 20px;">${error!""}</h2>
+    <#if error??>
+    <#else>
     <form class="well form-horizontal" action="/admin/vehicles/edit?id=${vehicleForm.vehicleID}" method="post" id="vehicleForm" name="vehicleForm">
 
         <div class="form-group">
@@ -103,7 +104,7 @@
 
 
     </form>
-
+    </#if>
 </div><!-- /.container -->
 </@layout>
 </body>

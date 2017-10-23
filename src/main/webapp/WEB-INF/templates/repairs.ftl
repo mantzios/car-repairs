@@ -22,7 +22,9 @@
 <body>
  <div class="container">
 
-    <h3 style="color: green; font-weight: bold; font-size: 20px;">${message!""}</h3>
+    <h3 style="color: green; font-weight: bold; font-size: 20px;">${error!""}</h3>
+    <#--<#if error??>-->
+        <#--<#else>-->
 
         <form class="well form-horizontal" action="/admin/repairs" method="post" id="createRepairForm" name="createRepairForm">
 
@@ -156,7 +158,7 @@
 
 
         </form>
-
+    <#--</#if>-->
  </div><!-- /.container -->
 </@layout>
 </body>

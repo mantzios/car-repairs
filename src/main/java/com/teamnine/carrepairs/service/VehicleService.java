@@ -1,6 +1,8 @@
 package com.teamnine.carrepairs.service;
 
 import com.teamnine.carrepairs.domain.Vehicle;
+import com.teamnine.carrepairs.exception.UserNotFoundException;
+import com.teamnine.carrepairs.exception.VehicleNotFoundException;
 import com.teamnine.carrepairs.model.VehicleForm;
 import javafx.util.Pair;
 
@@ -15,11 +17,11 @@ public interface VehicleService {
 
     List<Vehicle> findAll();
 
-    void insertVehicle(VehicleForm vehicleForm);
+    void insertVehicle(VehicleForm vehicleForm) throws UserNotFoundException;
 
     void editVehicle(VehicleForm vehicleForm);
 
-    Vehicle findById(long id);
+    Vehicle findById(long id) throws VehicleNotFoundException;
 
     List<Vehicle> searchVelicleByPlate(String searchText);
 

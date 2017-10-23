@@ -2,9 +2,11 @@ package com.teamnine.carrepairs.controller;
 
 import com.teamnine.carrepairs.converter.RepairConverter;
 import com.teamnine.carrepairs.domain.Repair;
+import com.teamnine.carrepairs.exception.UserNotFoundException;
 import com.teamnine.carrepairs.model.CreateRepairForm;
 import com.teamnine.carrepairs.model.EditRepairForm;
 import com.teamnine.carrepairs.model.SearchFormRepair;
+import com.teamnine.carrepairs.model.SearchRepairByDate;
 import com.teamnine.carrepairs.repository.VehicleRepository;
 import com.teamnine.carrepairs.service.AccountService;
 import com.teamnine.carrepairs.service.RepairService;
@@ -13,10 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -27,12 +26,11 @@ import java.util.*;
 @Controller
 public class RepairsController {
     private final static org.slf4j.Logger logger = LoggerFactory.getLogger(HomeController.class);
-    private static final String  CREATE_FORM= "createRepairForm";
-
+    private static final String CREATE_FORM= "createRepairForm";
+    private static final String USER_EXCEPTION="error";
     private static final String SEARCH_REPAIR = "searchForm";
     private static final String LIST_REPAIRS = "repairs";
-
-    Set<Repair> repairSet;
+    private Set<Repair> repairSet;
 
     @Autowired
     private RepairService repairService;
@@ -51,12 +49,11 @@ public class RepairsController {
 
     }
 
-
     @RequestMapping(value = "/admin/repairs", method = RequestMethod.POST)
     public String register(@Valid @ModelAttribute(CREATE_FORM)
                                    CreateRepairForm createRepairForm,
                            BindingResult bindingResult, HttpSession session,
-                           RedirectAttributes redirectAttributes) {
+                           RedirectAttributes redirectAttributes) throws UserNotFoundException {
         long id;
 
         if (bindingResult.hasErrors()) {
@@ -85,6 +82,7 @@ public class RepairsController {
     @RequestMapping(value = "admin/repairs/search", method = RequestMethod.GET)
     public String search(Model model, @ModelAttribute(SEARCH_REPAIR) SearchFormRepair searchFormRepair) {
         repairSet = new HashSet<>();
+        model.addAttribute("searchRepairByDate",new SearchRepairByDate());
         if (searchFormRepair.getAfm() != 0) {
             //call service to search by id
             repairSet.addAll(repairService.searchByAFM(searchFormRepair.getAfm()));
@@ -101,5 +99,10 @@ public class RepairsController {
         return "home";
     }
 
-
+    @ExceptionHandler(UserNotFoundException.class)
+    public String OwnerException(Model model){
+        model.addAttribute(USER_EXCEPTION,"There is no user with this AFM");
+        model.addAttribute(CREATE_FORM,new CreateRepairForm());
+        return "repairs";
+    }
 }

@@ -17,7 +17,9 @@
 </head>
 <body>
  <div class="container">
-    <h3 style="color: green; font-weight: bold; font-size: 20px;">${message!""}</h3>
+    <h3 style="color: green; font-weight: bold; font-size: 20px;">${error!""}</h3>
+     <#if error??>
+     <#else>
         <form class="well form-horizontal" action="/admin/edit/repair?id=${repair.id_repair}" method="post" id="editRepairForm" name="editRepairForm">
             <div class="form-group">
                 <@spring.bind "editRepairForm.datetime"/>
@@ -116,8 +118,10 @@
                 </div>
             </div>
         </form>
+     </#if>
     </div>
  </div><!-- /.container -->
+
 </@layout>
 </body>
 </html>

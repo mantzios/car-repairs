@@ -3,6 +3,7 @@ package com.teamnine.carrepairs.controller;
 import com.teamnine.carrepairs.Utilities.Utilities;
 import com.teamnine.carrepairs.converter.OwnerConverter;
 import com.teamnine.carrepairs.domain.Owner;
+import com.teamnine.carrepairs.exception.UserNotFoundException;
 import com.teamnine.carrepairs.model.OwnerForm;
 import com.teamnine.carrepairs.model.SearchForm;
 import com.teamnine.carrepairs.service.AccountService;
@@ -23,7 +24,7 @@ public class OwnersController {
     private AccountService accountService;
 
     private static final String OWNERS_LIST = "owners";
-
+    private static final String USER_EXCEPTION="error";
     private static final String OWNER_FORM = "ownerForm";
     private static final String SEARCH_OWNER = "searchOwner";
 
@@ -32,7 +33,7 @@ public class OwnersController {
     @RequestMapping(value = "admin/owners/delete/{id}", method = RequestMethod.GET)
     public String delete(Model model, @PathVariable String id) {
         accountService.deleteOwner(Long.parseLong(id));
-        return "redirect:/admin/home";
+        return "redirect:/admin/owners";
     }
 
     @RequestMapping(value = "/admin/owners", method = RequestMethod.GET)
@@ -66,7 +67,7 @@ public class OwnersController {
 
 
     @RequestMapping(value = "admin/owners/edit", method = RequestMethod.GET)
-    public String editOwner(Model model, @RequestParam(name = "id", required = true) long id) {
+    public String editOwner(Model model, @RequestParam(name = "id", required = true) long id) throws UserNotFoundException {
         Owner owner = accountService.findUser(id);
         OwnerForm form = OwnerConverter.buildOwnerForm(owner);
         model.addAttribute(OWNER_FORM, form);
@@ -114,6 +115,12 @@ public class OwnersController {
         return "owners";
     }
 
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public String UserException(Model model){
+        model.addAttribute(USER_EXCEPTION,"User not found");
+        return "editOwner";
+    }
 }
 
 

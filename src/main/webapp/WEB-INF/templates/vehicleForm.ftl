@@ -24,8 +24,7 @@
 <body>
 <div class="container">
 
-    <h3 style="color: green; font-weight: bold; font-size: 20px;">${message!""}</h3>
-
+    <h3 style="color: green; font-weight: bold; font-size: 20px;">${errorUser!""}</h3>
     <form class="well form-horizontal" action="/admin/vehicles/new" method="post" id="vehicleForm" name="vehicleForm">
 
         <div class="form-group">
@@ -103,7 +102,6 @@
 
 
     </form>
-
 </div><!-- /.container -->
 </@layout>
 </body>

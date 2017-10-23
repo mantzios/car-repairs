@@ -110,4 +110,9 @@ public class AccountServiceImpl implements AccountService {
 
     }
 
+    @Override
+    public void deleteOwner(long id) {
+        userRepository.delete(id);
+    }
+
 }

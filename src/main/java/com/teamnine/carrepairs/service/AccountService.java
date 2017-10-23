@@ -26,4 +26,5 @@ public interface AccountService {
     List<OwnerForm> searchOwnerByEmail(String searchText);
     List<OwnerForm> searchOwnerByAfm(Long searchText);
 
+    void  deleteOwner (long id);
 }

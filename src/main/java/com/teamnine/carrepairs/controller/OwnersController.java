@@ -29,10 +29,11 @@ public class OwnersController {
 
     List<OwnerForm> ownerForms;
 
-    @RequestMapping(value = "admin/repairs/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "admin/owners/delete/{id}", method = RequestMethod.GET)
     public String delete(Model model, @PathVariable String id) {
-        repairService.deleteRepair(Long.parseLong(id));
+        accountService.deleteOwner(Long.parseLong(id));
         return "redirect:/admin/home";
+    }
 
     @RequestMapping(value = "/admin/owners", method = RequestMethod.GET)
     public String owners(Model model) {

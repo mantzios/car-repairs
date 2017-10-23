@@ -67,7 +67,7 @@
                     <a href="/admin/owners/edit?id=${item.ownerID}"><image src="/edit.png" class=" "/></a>
                 </td>
                 <td>
-                    <a href="/admin/repairs/delete/${item.ownerID}"><image src="/delete.png" class=" "/></a>
+                    <a href="/admin/owners/delete/${item.ownerID}"><image src="/delete.png" class=" "/></a>
                 </td>
 
             </tr>

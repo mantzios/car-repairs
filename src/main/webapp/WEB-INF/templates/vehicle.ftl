@@ -61,7 +61,7 @@
                 <td>${item.color}</td>
 
                 <td><a href="/admin/vehicles/edit?id=${item.id}"><image src="/edit.png" class=" "/></a></td>
-                <td><a href="/admin/repairs/delete/${item.id}" m><image src="/delete.png" class=" "/></a></td>
+                <td><a href="/admin/vehicles/delete/${item.id}" m><image src="/delete.png" class=" "/></a></td>
 
             </tr>
             </#list>

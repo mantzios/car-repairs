@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.*;
@@ -97,7 +98,8 @@ public class RepairsController {
     }
 
     @ExceptionHandler(UserNotFoundException.class)
-    public String OwnerException(Model model){
+    public String OwnerException(Model model, HttpServletRequest request){
+       //CreateRepairForm repairForm = (CreateRepairForm) request.getAttribute(CREATE_FORM);
         model.addAttribute(USER_EXCEPTION,"There is no user with this AFM");
         model.addAttribute(CREATE_FORM,new CreateRepairForm());
         return "repairs";

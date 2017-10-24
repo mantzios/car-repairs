@@ -38,12 +38,15 @@
                             <i class="fa fa-calendar">
                             </i>
                         </div>
-                        <input class="form-control" id="datetime" name="datetime" placeholder="select date.." type="text"/>
+                        <input class="form-control" id="datetime" name="datetime" value= "${createRepairForm.datetime!""}"  placeholder="select date.." type="text"/>
                     </div>
+                                                    <div class="col-sm-12">
+                                                               <small  class="text-danger">
+                                                                <#list spring.status.errorMessages as error>${error}</#list>
+                                                               </small>
+                                                    </div>
                 </div>
-                <#list spring.status.errorMessages as error>
-                <span>${error}</span>
-                </#list>
+
             </div>
 
             <div class="form-group">
@@ -55,29 +58,35 @@
                              <i class="fa fa-clock-o" style="font-size:16px">
                              </i>
                         </div>
-                            <input type="text" class="form-control" id="time" name="time" placeholder="select time..">
+                            <input type="text" class="form-control" id="time" name="time"  value= "${createRepairForm.time!""}" placeholder="select time..">
                     </div>
+                    <div class="col-sm-12">
+                                                               <small  class="text-danger">
+                                                                <#list spring.status.errorMessages as error>${error}</#list>
+                                                               </small>
+                                                    </div>
                 </div>
-                <#list spring.status.errorMessages as error>
-                <span>${error}</span>
-                </#list>
-            </div>
 
+
+            </div>
             <div class="form-group">
                 <@spring.bind "createRepairForm.status"/>
                 <label class="col-md-4 control-label">Status</label>
                 <div class="col-md-4 selectContainer">
                     <div class="col-md-12 input-group">
                         <select name="status" id="status" class="form-control selectpicker">
-                            <option value="">Select status</option>
-                            <option>New</option>
-                            <option>In Progress</option>
-                            <option >Completed</option>
+                            <option value= "" >Select status</option>
+                            <option <#if "${createRepairForm.status}"=="New">selected</#if> >New</option>
+                            <option <#if "${createRepairForm.status}"=="In Progress">selected</#if>>In Progress</option>
+                            <option <#if "${createRepairForm.status}"=="Completed">selected</#if>>Completed</option>
                         </select>
                     </div>
-                    <#list spring.status.errorMessages as error>
-                    <span>${error}</span>
-                    </#list>
+                                <div class="col-sm-12">
+                                           <small  class="text-danger">
+                                            <#list spring.status.errorMessages as error>${error}</#list>
+                                           </small>
+                                </div>
+
                 </div>
             </div>
 
@@ -87,11 +96,14 @@
                 <label class="col-md-4 control-label">Cost</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="col-md-12 input-group">
-                        <input  name="cost" id="cost" placeholder="Cost" class="form-control"  type="text">
+                        <input  name="cost" id="cost" placeholder="Cost" class="form-control"  value= "${createRepairForm.cost!""}" type="text">
                     </div>
-                    <#list spring.status.errorMessages as error>
-                     <span>${error}</span>
-                    </#list>
+                                    <div class="col-sm-12">
+                                               <small  class="text-danger">
+                                                <#list spring.status.errorMessages as error>${error}</#list>
+                                               </small>
+                                    </div>
+
                 </div>
             </div>
 
@@ -100,25 +112,30 @@
                             <label class="col-md-4 control-label">Owner's AFM</label>
                             <div class="col-md-4 inputGroupContainer">
                                 <div class="col-md-12 input-group">
-                                    <input  name="afm" id="afm" placeholder="afm" class="form-control"  type="text">
+                                    <input  name="afm" id="afm" placeholder="afm" class="form-control"  value= "${createRepairForm.afm!""}"type="text">
                                 </div>
-                                <#list spring.status.errorMessages as error>
-                                 <span>${error}</span>
-                                </#list>
+                                <div class="col-sm-12">
+                                           <small  class="text-danger">
+                                            <#list spring.status.errorMessages as error>${error}</#list>
+                                           </small>
+                                </div>
                             </div>
 
             </div>
 
             <div class="form-group">
                             <@spring.bind "createRepairForm.plate_num"/>
-                            <label class="col-md-4 control-label">Plate Number</label>
-                            <div class="col-md-4 inputGroupContainer">
+                            <label class="col-md-4 control-label ">Plate Number</label>
+                            <div class="col-md-4 inputGroupContainer ">
                                 <div class="col-md-12 input-group">
-                                    <input  name="plate_num" id="plate_num" placeholder="ABC-1234" class="form-control"  type="text">
+                                    <input  name="plate_num" id="plate_num" placeholder="ABC-1234" value= "${createRepairForm.plate_num!""}" class="form-control "  type="text">
                                 </div>
-                                <#list spring.status.errorMessages as error>
-                                 <span>${error}</span>
-                                </#list>
+                                <div class="col-sm-12">
+                                           <small  class="text-danger">
+                                            <#list spring.status.errorMessages as error>${error}</#list>
+                                           </small>
+                                </div>
+
                             </div>
             </div>
 
@@ -127,11 +144,13 @@
                 <label class="col-md-4 control-label">Type</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="col-md-12 input-group ">
-                        <input name="type" id="type" placeholder="Type" class="form-control"  type="text">
+                        <input name="type" id="type" placeholder="Type" class="form-control"  value= "${createRepairForm.type!""}"type="text">
                      </div>
-                    <#list spring.status.errorMessages as error>
-                    <span>${error}</span>
-                    </#list>
+                                <div class="col-sm-12">
+                                           <small  class="text-danger">
+                                            <#list spring.status.errorMessages as error>${error}</#list>
+                                           </small>
+                                </div>
                 </div>
             </div>
 
@@ -140,11 +159,14 @@
                 <label class="col-md-4 control-label">Comments</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="col-md-12 input-group">
-                        <textarea class="form-control col-md-12" rows="5" name="textarea" id="textarea" placeholder="Add your comment here.."></textarea>
+                        <textarea class="form-control col-md-12" rows="5" name="textarea" value= "${createRepairForm.textarea!""}" id="textarea" placeholder="Add your comment here.."></textarea>
                     </div>
-                     <#list spring.status.errorMessages as error>
-                        <span>${error}</span>
-                     </#list>
+                                <div class="col-sm-12">
+                                           <small  class="text-danger">
+                                            <#list spring.status.errorMessages as error>${error}</#list>
+                                           </small>
+                                </div>
+
                 </div>
             </div>
 
@@ -185,5 +207,6 @@
 
         		})
 	})
+
 </script>
 

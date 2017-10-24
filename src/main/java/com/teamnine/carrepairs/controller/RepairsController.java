@@ -50,17 +50,14 @@ public class RepairsController {
     }
 
     @RequestMapping(value = "/admin/repairs", method = RequestMethod.POST)
-    public String register(@Valid @ModelAttribute(CREATE_FORM)
+    public String register(Model model,@Valid @ModelAttribute(CREATE_FORM)
                                    CreateRepairForm createRepairForm,
                            BindingResult bindingResult, HttpSession session,
                            RedirectAttributes redirectAttributes) throws UserNotFoundException {
         long id;
 
         if (bindingResult.hasErrors()) {
-            //have some error handling here, perhaps add extra error messages to the model
-            //for now we're going to return a view ( register) but normally we would redirect to the
-            //get method after adding the binding result and the form to the redirect attributes.
-            logger.error(String.format("%s Validation Errors present: ", bindingResult.getErrorCount()));
+            model.addAttribute(CREATE_FORM, createRepairForm);
             return "repairs";
         }
         Repair repair = RepairConverter.buildRepairObject(createRepairForm,

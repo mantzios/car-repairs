@@ -11,8 +11,8 @@ public class VehicleConverter {
 
     public static Vehicle buildVehicle(VehicleForm vehicleForm){
         Vehicle vehicle = new Vehicle();
-        vehicle.setColor(vehicleForm.getColor());
-        vehicle.setModel(vehicleForm.getModel());
+        vehicle.setColor(vehicleForm.getColor().toLowerCase());
+        vehicle.setModel(vehicleForm.getModel().toLowerCase());
         vehicle.setPlate(vehicleForm.getPlate());
         if(vehicleForm.getVehicleID()!=null){
             vehicle.setId(Long.parseLong(vehicleForm.getVehicleID()));

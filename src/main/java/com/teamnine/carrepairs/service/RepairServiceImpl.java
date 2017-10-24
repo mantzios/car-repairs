@@ -2,6 +2,7 @@ package com.teamnine.carrepairs.service;
 
 import com.teamnine.carrepairs.Utilities.Utilities;
 import com.teamnine.carrepairs.domain.Repair;
+import com.teamnine.carrepairs.exception.RepairNotFoundException;
 import com.teamnine.carrepairs.repository.RepairRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +31,12 @@ public class RepairServiceImpl implements RepairService {
     }
 
     @Override
-    public Repair findById(Long id) {
-        return repairRepository.findOne(id);
+    public Repair findById(Long id) throws RepairNotFoundException {
+        Repair repair = repairRepository.findOne(id);
+        if (repair == null) {
+            throw new RepairNotFoundException("message");
+        }
+        return repair;
 
     }
 

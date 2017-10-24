@@ -24,8 +24,9 @@
 <body>
 <div class="container">
 
-    <h3 style="color: green; font-weight: bold; font-size: 20px;">${message!""}</h3>
-
+    <h2 style="color: green; font-weight: bold; font-size: 20px;">${error!""}</h2>
+    <#if error??>
+    <#else>
     <form class="well form-horizontal" action="/admin/vehicles/edit?id=${vehicleForm.vehicleID}" method="post" id="vehicleForm" name="vehicleForm">
 
         <div class="form-group">
@@ -81,6 +82,18 @@
             </div>
         </div>
 
+        <div hidden="hidden" class="form-group">
+            <@spring.bind "vehicleForm.ownerAfm"/>
+            <label class="col-md-4 control-label">Year</label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="col-md-12 input-group ">
+                    <input name="ownerAfm" id="ownerAfm" value="${vehicleForm.ownerAfm!"123456789"}" placeholder="Year" hidden="hidden" class="form-control"  type="text">
+                </div>
+                <#list spring.status.errorMessages as error>
+                    <h5>${error}</h5>
+                </#list>
+            </div>
+        </div>
 
         <div class="form-group">
             <label class="col-md-4 control-label"></label>
@@ -91,7 +104,7 @@
 
 
     </form>
-
+    </#if>
 </div><!-- /.container -->
 </@layout>
 </body>

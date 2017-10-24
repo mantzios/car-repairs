@@ -6,6 +6,7 @@ import com.teamnine.carrepairs.domain.Owner;
 import com.teamnine.carrepairs.domain.Repair;
 import com.teamnine.carrepairs.domain.Vehicle;
 import com.teamnine.carrepairs.exception.LoginException;
+import com.teamnine.carrepairs.exception.UserNotFoundException;
 import com.teamnine.carrepairs.model.OwnerForm;
 import com.teamnine.carrepairs.repository.UserRepository;
 import com.teamnine.carrepairs.repository.VehicleRepository;
@@ -43,12 +44,20 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Owner findOwnerbyAFM(long afm) {
-        return userRepository.findOwnerByAFM(afm);
+    public Owner findOwnerbyAFM(long afm) throws UserNotFoundException {
+        Owner owner=userRepository.findOwnerByAFM(afm);
+        if (owner == null) {
+            throw new UserNotFoundException("user not found");
+        }
+        return owner;
     }
     @Override
-    public Owner findOwnerbyEmail(String email) {
-        return userRepository.findByEmail(email);
+    public Owner findOwnerbyEmail(String email) throws UserNotFoundException{
+        Owner owner = userRepository.findByEmail(email);
+        if (owner == null) {
+            throw new UserNotFoundException("user not found");
+        }
+        return owner;
     }
 
     @Override
@@ -67,8 +76,12 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Owner findUser(long id) {
-        return userRepository.findByOwnerid(id);
+    public Owner findUser(long id) throws UserNotFoundException {
+        Owner owner = userRepository.findByOwnerid(id);
+        if (owner == null) {
+            throw new UserNotFoundException("user not found");
+        }
+        return owner;
     }
 
     @Override
@@ -87,24 +100,24 @@ public class AccountServiceImpl implements AccountService {
         userRepository.save(owner);
     }
 
-
-
-
-
     public List<OwnerForm> searchOwnerByEmail(String searchText){
         List<OwnerForm> ownerForms= new ArrayList<>();
-        Owner owner=findOwnerbyEmail( searchText);
-        if(owner!=null){
+        try {
+            Owner owner = findOwnerbyEmail( searchText);
             ownerForms.add(OwnerConverter.buildOwnerForm(owner));
+        } catch (UserNotFoundException e) {
+            e.printStackTrace();
         }
         return ownerForms;
     }
 
     public List<OwnerForm> searchOwnerByAfm(Long searchText){
         List<OwnerForm> ownerForms= new ArrayList<>();
-        Owner owner=findOwnerbyAFM( searchText);
-        if(owner!=null){
+        try {
+            Owner owner = findOwnerbyAFM(searchText);
             ownerForms.add(OwnerConverter.buildOwnerForm(owner));
+        } catch (UserNotFoundException e) {
+            e.printStackTrace();
         }
         return ownerForms;
 

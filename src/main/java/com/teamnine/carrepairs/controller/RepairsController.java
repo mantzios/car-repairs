@@ -81,9 +81,14 @@ public class RepairsController {
     public String search(Model model, @ModelAttribute(SEARCH_REPAIR) SearchFormRepair searchFormRepair) {
         repairSet = new HashSet<>();
         model.addAttribute("searchRepairByDate",new SearchRepairByDate());
-        if (searchFormRepair.getAfm() != 0) {
+        if (searchFormRepair.getAfm() != null) {
             //call service to search by id
-            repairSet.addAll(repairService.searchByAFM(searchFormRepair.getAfm()));
+            try{
+                repairSet.addAll(repairService.searchByAFM(Long.parseLong(searchFormRepair.getAfm())));
+            }catch (Exception e){
+                model.addAttribute("message","Please give a valid afm");
+            }
+
         }
         if (searchFormRepair.getVehiclePlate() != null) {
             // call service to search  by vehicle plate

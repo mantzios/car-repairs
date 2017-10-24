@@ -25,5 +25,8 @@ public interface VehicleService {
 
     List<Vehicle> searchVelicleByAfm(String searchText);
 
+    void deleteVehicle(Long id);
+
+
 
 }

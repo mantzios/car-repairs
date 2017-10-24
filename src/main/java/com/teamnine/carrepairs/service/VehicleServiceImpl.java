@@ -81,6 +81,11 @@ public class VehicleServiceImpl implements VehicleService {
 
     }
 
+    @Override
+    public void deleteVehicle(Long id) {
+        vehicleRepository.delete(id);
+    }
+
     /*public List<> searchVehicleBySearchText(String searchText){
 
         StringBuilder stringBuilder = new StringBuilder();

@@ -32,6 +32,10 @@
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         ${error_message!""}
                     </div>
+
+
+
+
                 </#if>
 
                 </form>

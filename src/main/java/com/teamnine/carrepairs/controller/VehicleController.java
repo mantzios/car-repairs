@@ -79,7 +79,7 @@ public class VehicleController {
     @RequestMapping(value = "admin/vehicles/delete/{id}", method = RequestMethod.GET)
     public String delete(Model model, @PathVariable String id) {
         vehicleService.deleteVehicle(Long.parseLong(id));
-        return "redirect:/admin/home";
+        return "redirect:/admin/vehicles";
     }
 
     @RequestMapping(value = "admin/vehicle/search", method = RequestMethod.GET)

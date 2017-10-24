@@ -116,11 +116,22 @@
         </div>
 
 
+
     </form>
 
 </div><!-- /.container -->
 </@layout>
 </body>
 </html>
+
+<script>
+    $("#afm").click(function(){
+        $.ajax({
+            type:"GET"
+            url: "localhost:8080/admin/api/1", success: function(result){
+           window.alert(result)
+        }});
+    });
+</script>
 
 

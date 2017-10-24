@@ -1,0 +1,11 @@
+@font-face {
+    font-family: ZonaPro;
+    src: url("/ZonaPro-Light.otf");
+}
+body{
+    font-family: ZonaPro;
+}
+
+tr{
+    font-family: Arial;
+}

@@ -103,7 +103,7 @@ public class OwnersController {
         else if (Utilities.isAfm(searchText)) {
         ownerForms = accountService.searchOwnerByAfm(Long.parseLong(searchText));
             if (ownerForms.isEmpty()) {
-            message="Owner with vat num: ".concat(searchText).concat("not found. ");
+            message="Owner with vat num: ".concat(searchText).concat(" not found. ");
              }
          }
         else {message="Please give a valid VAT num or Email ";}

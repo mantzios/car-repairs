@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
+<@layout flag="vehicles" >
+    <#import "/spring.ftl" as spring/>
 <head>
-
+    <link rel="stylesheet"  type="text/css" href="/style.css" />
 <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
 
 </head>
 <body>
-<@layout flag="vehicles" >
-<#import "/spring.ftl" as spring/>
+
 <div class="container">
 
    <div class="row">

@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -100,7 +101,9 @@ public class VehicleController {
                 message="Vehicle of owner with vat num: ".concat(searchText).concat(" not found. ");
             }
         }
-        else {message="Please give a valid VAT num or Email ";}
+        else {
+            List<Vehicle> vehicles= new ArrayList<>();
+            message="Please give a valid VAT num or Email ";}
 
         model.addAttribute(VEHICLE_LIST,vehicles);
         model.addAttribute(SEARCH_VEHICLE,new SearchForm());

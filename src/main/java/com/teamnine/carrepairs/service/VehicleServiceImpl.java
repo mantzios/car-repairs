@@ -82,7 +82,7 @@ public class VehicleServiceImpl implements VehicleService {
     public List<Vehicle> searchVelicleByAfm(String searchText){
         List<Vehicle> vehicles= new ArrayList<>();
         try {
-            vehicles=(List) accountService.findOwnerbyAFM(Long.parseLong(searchText)).getVehicle();
+            vehicles.addAll(accountService.findOwnerbyAFM(Long.parseLong(searchText)).getVehicle());
         } catch (UserNotFoundException e) {
             e.printStackTrace();
         }

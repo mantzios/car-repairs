@@ -80,4 +80,9 @@
 </div>
 </@layout>
 </body>
+
 </html>
+
+<script>
+    alert("test")
+</script>

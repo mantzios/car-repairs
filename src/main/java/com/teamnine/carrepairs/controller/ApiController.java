@@ -4,6 +4,9 @@ import com.teamnine.carrepairs.domain.Owner;
 import com.teamnine.carrepairs.exception.UserNotFoundException;
 import com.teamnine.carrepairs.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,12 +20,12 @@ public class ApiController {
     private AccountService accountService;
 
     @RequestMapping(value = "/admin/api/{id}",method = RequestMethod.GET)
-    public @ResponseBody int checkUser(@PathVariable long id){
+    public ResponseEntity checkUser(@PathVariable long id){
         try {
             Owner owner = accountService.findUser(id);
         } catch (UserNotFoundException e) {
-            return -1;
+            return new ResponseEntity(HttpStatus.NOT_FOUND) ;
         }
-        return 1;
+        return new ResponseEntity<Integer>(HttpStatus.OK);
     }
 }

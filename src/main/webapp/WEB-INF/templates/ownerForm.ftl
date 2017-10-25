@@ -125,12 +125,12 @@
 </html>
 
 <script>
-    $("#afm").click(function(){
+    $("#afm").click(function (e) {
         $.ajax({
-            type:"GET"
-            url: "localhost:8080/admin/api/1", success: function(result){
-           window.alert(result)
-        }});
+            type: "GET",
+            url: "/admin/api/1",
+            success: function() {console.log("1")}
+        });
     });
 </script>
 

@@ -111,9 +111,10 @@
         <div class="form-group">
             <label class="col-md-4 control-label"></label>
             <div class="col-md-4"><br>
-                <button type="submit" class="btn pull-right btn-warning" >Add Repair</button>
+                <button type="submit" class="btn pull-right btn-warning" id="btn">Add Repair</button>
             </div>
         </div>
+
 
 
     </form>
@@ -122,5 +123,25 @@
 </@layout>
 </body>
 </html>
+
+<script>
+    $("#afm").focusout(function (e) {
+        var url=document.getElementById("afm").value;
+        console.log(url);
+        $.ajax({
+            type: "GET",
+            url: "/admin/api/".concat(url),
+            success: function() {
+                document.getElementById("afm").style.borderColor = "green";
+            },
+            error: function(){
+                document.getElementById("afm").style.borderColor = "red";
+                var resetBtn = document.getElementById("btn");
+                resetBtn.disabled = true;
+            }
+
+        });
+    });
+</script>
 
 

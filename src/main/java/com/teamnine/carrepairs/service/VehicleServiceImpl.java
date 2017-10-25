@@ -28,8 +28,12 @@ public class VehicleServiceImpl implements VehicleService {
     private AccountService accountService;
 
     @Override
-    public Vehicle searchByPlate(String plate) {
-        return vehicleRepository.findByPlate(plate);
+    public Vehicle searchByPlate(String plate) throws VehicleNotFoundException{
+        Vehicle vehicle=vehicleRepository.findByPlate(plate);
+        if (vehicle == null) {
+            throw new VehicleNotFoundException("vehicle not found");
+        }
+        return vehicle;
     }
 
     @Override
@@ -71,11 +75,13 @@ public class VehicleServiceImpl implements VehicleService {
 
     public List<Vehicle> searchVelicleByPlate(String searchText){
         List<Vehicle> vehicles= new ArrayList<>();
-        Vehicle vehicle=searchByPlate( searchText);
-        if(vehicle!=null){
+        Vehicle vehicle;
+        try {
+            vehicle = searchByPlate( searchText);
             vehicles.add(vehicle);
+        } catch (VehicleNotFoundException e) {
+            e.printStackTrace();
         }
-
         return vehicles;
 
     }

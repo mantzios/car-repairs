@@ -90,6 +90,7 @@
                 <#list spring.status.errorMessages as error>
                     <h5>${error}</h5>
                 </#list>
+
             </div>
         </div>
 
@@ -114,15 +115,17 @@
             console.log(url);
             $.ajax({
                 type: "GET",
-                url: "/admin/api/".concat(url),
+                url: "/admin/api/afm/".concat(url),
                 success: function() {
-                    document.getElementById("afm").style.borderColor = "green";
+                    document.getElementById("afm").style.backgroundColor = "#CCFFCC";
+                    document.getElementById("afm").style.border = "green";
                     var resetBtn = document.getElementById("btn");
                     resetBtn.disabled = false;
                 },
                 error: function(){
                     document.getElementById("afm").style.borderColor = "red";
                     var resetBtn = document.getElementById("btn");
+                    document.getElementById("afm").style.backgroundColor = "#FFCBCB";
                     resetBtn.disabled = true;
                 }
 

@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
     <link rel="stylesheet"  type="text/css" href="/style.css"/>
 
+
+
 </head>
 
 <body>
@@ -82,7 +84,3 @@
 </body>
 
 </html>
-
-<script>
-    alert("test")
-</script>

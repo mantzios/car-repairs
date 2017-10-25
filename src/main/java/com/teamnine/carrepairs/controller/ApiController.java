@@ -19,10 +19,10 @@ public class ApiController {
     @Autowired
     private AccountService accountService;
 
-    @RequestMapping(value = "/admin/api/{id}",method = RequestMethod.GET)
-    public ResponseEntity checkUser(@PathVariable long id){
+    @RequestMapping(value = "/admin/api/{afm}",method = RequestMethod.GET)
+    public ResponseEntity checkUser(@PathVariable long afm){
         try {
-            Owner owner = accountService.findUser(id);
+            Owner owner = accountService.findOwnerbyAFM(afm);
         } catch (UserNotFoundException e) {
             return new ResponseEntity(HttpStatus.NOT_FOUND) ;
         }

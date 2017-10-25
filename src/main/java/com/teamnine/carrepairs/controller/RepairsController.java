@@ -12,6 +12,7 @@ import com.teamnine.carrepairs.service.AccountService;
 import com.teamnine.carrepairs.service.RepairService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +32,7 @@ public class RepairsController {
     private static final String USER_EXCEPTION="error";
     private static final String SEARCH_REPAIR = "searchForm";
     private static final String LIST_REPAIRS = "repairs";
+    private static final String DELETE_EXCEPTION = "delete" ;
     private Set<Repair> repairSet;
 
     @Autowired
@@ -108,5 +110,11 @@ public class RepairsController {
         model.addAttribute(USER_EXCEPTION,"There is no user with this AFM");
         model.addAttribute(CREATE_FORM,new CreateRepairForm());
         return "repairs";
+    }
+
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    public String DeleteException(Model model, RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute(DELETE_EXCEPTION,"You cannot delete this repair");
+        return "redirect:/admin/home";
     }
 }

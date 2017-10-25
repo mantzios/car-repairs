@@ -16,6 +16,7 @@
 </div></p>
 
 <h4 style=" font-weight: bold; font-size: 20px;">${message!""}</h4>
+    <h3>${delete!""}</h3>
 <div class="row">
 
 

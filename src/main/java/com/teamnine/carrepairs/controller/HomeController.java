@@ -29,9 +29,8 @@ public class HomeController {
     private  final static org.slf4j.Logger logger = LoggerFactory.getLogger(HomeController.class);
     private static final String SEARCH_REPAIR_BY_DATE = "searchRepairByDate";
     private static final String SEARCH_REPAIR = "searchForm";
-
-    List<Repair> repairs;
     private static final String DELETE_EXCEPTION ="delete";
+
     private List<Repair> repairs;
 
     @Autowired

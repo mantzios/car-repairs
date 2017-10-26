@@ -66,8 +66,7 @@
                 <div class="col-md-4 selectContainer">
                     <div class="col-md-12 input-group">
                         <select name="status" id="status" class="form-control selectpicker">
-                            <option value= "">Select status</option>
-                            <option <#if "${repair.status}"=="New">selected</#if> >New</option>
+                            <option <#if "${repair.status}"=="Pending">selected</#if> >Pending</option>
                             <option <#if "${repair.status}"=="In Progress">selected</#if> >In Progress</option>
                             <option <#if "${repair.status}"=="Completed">selected</#if>>Completed</option>
                         </select>

@@ -37,6 +37,9 @@ public class Repair {
     @JoinColumn(name = "Owner_id", referencedColumnName = "Owner_id")
     private Owner owner;
 
+    public Repair() {
+        setStatus("Pending");
+    }
 
     public Long getId() {
         return id;

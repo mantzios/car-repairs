@@ -88,7 +88,7 @@
             <label class="col-md-4 control-label">Year</label>
             <div class="col-md-4 inputGroupContainer">
                 <div class="col-md-12 input-group ">
-                    <input name="ownerAfm" id="ownerAfm" value="${vehicleForm.ownerAfm!"123456789"}" placeholder="Year" hidden="hidden" class="form-control"  type="text">
+                    <input name="ownerAfm" id="afm" value="${vehicleForm.ownerAfm!"123456789"}" placeholder="Year" hidden="hidden" class="form-control"  type="text">
                 </div>
                 <#list spring.status.errorMessages as error>
                     <h5>${error}</h5>
@@ -99,7 +99,7 @@
         <div class="form-group">
             <label class="col-md-4 control-label"></label>
             <div class="col-md-4"><br>
-                <button type="submit" class="btn pull-right btn-warning" >Add Vehicle</button>
+                <button type="submit" class="btn pull-right btn-warning" id="btn">Add Vehicle</button>
             </div>
         </div>
 
@@ -110,3 +110,27 @@
 </@layout>
 </body>
 </html>
+
+<script>
+    $(document).ready(function () {
+        $("#afm").focusout(function (e) {
+            var url=document.getElementById("afm").value;
+            console.log(url);
+            $.ajax({
+                type: "GET",
+                url: "/admin/api/afm/".concat(url),
+                success: function() {
+                    document.getElementById("afm").style.borderColor = "green";
+                    var resetBtn = document.getElementById("btn");
+                    resetBtn.disabled = false;
+                },
+                error: function(){
+                    document.getElementById("afm").style.borderColor = "red";
+                    var resetBtn = document.getElementById("btn");
+                    resetBtn.disabled = true;
+                }
+
+            });
+        });
+    })
+</script>

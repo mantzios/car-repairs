@@ -9,7 +9,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript" src="https://formden.com/static/cdn/formden.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.js"></script>
-
+    <script type="text/javascript" src="afmCheck.js"></script>
 
     <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
     <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
@@ -175,7 +175,7 @@
         <div class="form-group">
             <label class="col-md-4 control-label"></label>
             <div class="col-md-4"><br>
-                <button type="submit" class="btn pull-right btn-warning" >Add Repair</button>
+                <button type="submit" class="btn pull-right btn-warning" id="btn">Add Repair</button>
             </div>
         </div>
 
@@ -208,6 +208,48 @@
 
         })
     })
+
+    $(document).ready(function () {
+        $("#plate_num").focusout(function (e) {
+            var url=document.getElementById("plate_num").value;
+            console.log(url);
+            $.ajax({
+                type: "GET",
+                url: "/admin/api/plate/".concat(url),
+                success: function() {
+                    document.getElementById("plate_num").style.borderColor = "green";
+                    var resetBtn = document.getElementById("btn");
+                    resetBtn.disabled = false;
+                },
+                error: function(){
+                    document.getElementById("plate_num").style.borderColor = "red";
+                    var resetBtn = document.getElementById("btn");
+                    resetBtn.disabled = true;
+                }
+
+            });
+        });
+    })
+
+    $("#afm").focusout(function (e) {
+        var url=document.getElementById("afm").value;
+        console.log(url);
+        $.ajax({
+            type: "GET",
+            url: "/admin/api/afm/".concat(url),
+            success: function() {
+                document.getElementById("afm").style.borderColor = "green";
+                var resetBtn = document.getElementById("btn");
+                resetBtn.disabled = false;
+            },
+            error: function(){
+                document.getElementById("afm").style.borderColor = "red";
+                var resetBtn = document.getElementById("btn");
+                resetBtn.disabled = true;
+            }
+
+        });
+    });
 
 </script>
 

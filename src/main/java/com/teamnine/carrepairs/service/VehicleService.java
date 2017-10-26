@@ -11,7 +11,7 @@ import java.util.Set;
 
 public interface VehicleService {
 
-    Vehicle searchByPlate(String plate);
+    Vehicle searchByPlate(String plate) throws VehicleNotFoundException;
 
     Set<Vehicle> searchByOwnerAfm(int afm);
 

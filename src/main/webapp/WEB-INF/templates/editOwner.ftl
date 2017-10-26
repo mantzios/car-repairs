@@ -102,7 +102,7 @@
             <label class="col-md-4 control-label">Password</label>
             <div class="col-md-4 inputGroupContainer">
                 <div class="col-md-12 input-group ">
-                    <input name="password" id="password" placeholder="Password"  class="form-control"  type="password">
+                    <input name="password" id="password" placeholder="Password" value="${ownerForm.password!""}" class="form-control"  type="password">
                 </div>
                 <#list spring.status.errorMessages as error>
                     <h5>${error}</h5>

@@ -48,6 +48,8 @@
             <th>Model</th>
             <th>Year</th>
             <th>Color</th>
+            <th>First Name</th>
+            <th>Last Name</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -60,7 +62,8 @@
                 <td>${item.model}</td>
                 <td>${item.year}</td>
                 <td>${item.color}</td>
-
+                <td>${item.owner.name}</td>
+                <td>${item.owner.lastname}</td>
                 <td><a href="/admin/vehicles/edit?id=${item.id}"><image src="/edit.png" class=" "/></a></td>
                 <td><a href="/admin/vehicles/delete/${item.id}" m><image src="/delete.png" class=" "/></a></td>
 

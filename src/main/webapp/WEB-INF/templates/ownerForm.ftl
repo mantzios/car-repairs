@@ -123,7 +123,7 @@
         <div class="form-group">
             <label class="col-md-4 control-label"></label>
             <div class="col-md-4"><br>
-                <button type="submit" class="btn pull-right btn-warning" id="btn">Add Repair</button>
+                <button type="submit" class="btn pull-right btn-warning" id="btn">Add Owner</button>
             </div>
         </div>
 

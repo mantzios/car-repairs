@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html>
+<@layout flag="owners" >
+    <#import "/spring.ftl" as spring/>
 <head>
 
 <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+    <link rel="stylesheet"  type="text/css" href="/style.css"/>
+
+
 
 </head>
 
 <body>
-<@layout flag="owners" >
-<#import "/spring.ftl" as spring/>
-<div class="container">
 
+<div class="container">
+    <h3>${delete!""}</h3>
 <div class="row">
     <button type="button" style="margin:10px"  class="btn btn-warning pull-right" id="createBtn" onClick="location.href='/admin/owners/new'" ><i class="fa fa-plus"></i>  Add New Owner</button>
 
@@ -78,4 +82,5 @@
 </div>
 </@layout>
 </body>
+
 </html>

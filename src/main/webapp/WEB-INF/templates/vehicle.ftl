@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
+<@layout flag="vehicles" >
+    <#import "/spring.ftl" as spring/>
 <head>
-
+    <link rel="stylesheet"  type="text/css" href="/style.css" />
 <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
 
 </head>
 <body>
-<@layout flag="vehicles" >
-<#import "/spring.ftl" as spring/>
-<div class="container">
 
+<div class="container">
+    <h3>${delete!""}</h3>
    <div class="row">
        <button type="button" style="margin:10px"  class="btn btn-warning pull-right" id="createBtn" onClick="location.href='/admin/vehicles/new'" ><i class="fa fa-plus"></i>  Add New Vehicle</button>
 

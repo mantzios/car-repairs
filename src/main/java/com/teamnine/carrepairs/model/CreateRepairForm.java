@@ -25,7 +25,6 @@ public class CreateRepairForm {
     @Pattern(regexp = COST, message = "{repair.invalid.cost}")
     private String cost;
 
-
     private String textarea;
     @NotEmpty(message = "{repair.time.empty}")
     private String time;
@@ -116,5 +115,4 @@ public class CreateRepairForm {
     public void setId_repair(String id_repair) {
         this.id_repair = id_repair;
     }
-    }
-
+}

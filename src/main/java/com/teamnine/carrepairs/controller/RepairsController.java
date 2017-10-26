@@ -31,6 +31,7 @@ public class RepairsController {
     private static final String USER_EXCEPTION="error";
     private static final String SEARCH_REPAIR = "searchForm";
     private static final String LIST_REPAIRS = "repairs";
+    private static final String DELETE_EXCEPTION = "delete" ;
     private Set<Repair> repairSet;
 
     @Autowired
@@ -54,7 +55,7 @@ public class RepairsController {
 
     @RequestMapping(value = "/admin/repairs", method = RequestMethod.POST)
     public String register(Model model,@Valid @ModelAttribute(CREATE_FORM)
-                                   CreateRepairForm createRepairForm,
+            CreateRepairForm createRepairForm,
                            BindingResult bindingResult, HttpSession session,
                            RedirectAttributes redirectAttributes) throws UserNotFoundException {
         long id;
@@ -64,8 +65,8 @@ public class RepairsController {
             return "repairs";
         }
         Repair repair = RepairConverter.buildRepairObject(createRepairForm,
-                        accountService.findOwnerbyAFM(Long.parseLong(createRepairForm.getAfm())),
-                        vehicleRepository.findByPlate(createRepairForm.getPlate_num()));
+                accountService.findOwnerbyAFM(Long.parseLong(createRepairForm.getAfm())),
+                vehicleRepository.findByPlate(createRepairForm.getPlate_num()));
 
         id = repairService.save(repair);
         redirectAttributes.addFlashAttribute("message", "Repair successfully added with id: " + id);
@@ -83,9 +84,14 @@ public class RepairsController {
     public String search(Model model, @ModelAttribute(SEARCH_REPAIR) SearchFormRepair searchFormRepair) {
         repairSet = new HashSet<>();
         model.addAttribute("searchRepairByDate",new SearchRepairByDate());
-        if (searchFormRepair.getAfm() != 0) {
+        if (searchFormRepair.getAfm() != null) {
             //call service to search by id
-            repairSet.addAll(repairService.searchByAFM(searchFormRepair.getAfm()));
+            try{
+                repairSet.addAll(repairService.searchByAFM(Long.parseLong(searchFormRepair.getAfm())));
+            }catch (Exception e){
+                model.addAttribute("message","Please give a valid afm");
+            }
+
         }
         if (searchFormRepair.getVehiclePlate() != null) {
             // call service to search  by vehicle plate
@@ -101,9 +107,15 @@ public class RepairsController {
 
     @ExceptionHandler(UserNotFoundException.class)
     public String OwnerException(Model model, HttpServletRequest request){
-       //CreateRepairForm repairForm = (CreateRepairForm) request.getAttribute(CREATE_FORM);
+        //CreateRepairForm repairForm = (CreateRepairForm) request.getAttribute(CREATE_FORM);
         model.addAttribute(USER_EXCEPTION,"There is no user with this AFM");
         model.addAttribute(CREATE_FORM,new CreateRepairForm());
         return "repairs";
+    }
+
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    public String DeleteException(Model model, RedirectAttributes redirectAttributes){
+        redirectAttributes.addFlashAttribute(DELETE_EXCEPTION,"You cannot delete this repair");
+        return "redirect:/admin/home";
     }
 }

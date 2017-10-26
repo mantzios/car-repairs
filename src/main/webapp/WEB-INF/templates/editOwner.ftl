@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<@layout flag="repairs">
+<@layout flag="owners">
     <#import "/spring.ftl" as spring/>
 <head>
 
@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <link rel="stylesheet"  type="text/css" href="/style.css" />
 
     <style>
         h5 {color: red}
@@ -101,7 +102,7 @@
             <label class="col-md-4 control-label">Password</label>
             <div class="col-md-4 inputGroupContainer">
                 <div class="col-md-12 input-group ">
-                    <input name="password" id="password" placeholder="Password" value="${ownerForm.password}" class="form-control"  type="password">
+                    <input name="password" id="password" placeholder="Password"  class="form-control"  type="password">
                 </div>
                 <#list spring.status.errorMessages as error>
                     <h5>${error}</h5>

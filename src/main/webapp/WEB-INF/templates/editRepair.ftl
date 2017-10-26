@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <link rel="stylesheet"  type="text/css" href="/style.css" />
 
 </head>
 <body>
@@ -66,7 +67,7 @@
                         <select name="status" id="status" class="form-control selectpicker">
                             <option value= "">Select status</option>
                             <option <#if "${repair.status}"=="New">selected</#if> >New</option>
-                            <option<#if "${repair.status}"=="In Progress">selected</#if> >In Progress</option>
+                            <option <#if "${repair.status}"=="In Progress">selected</#if> >In Progress</option>
                             <option <#if "${repair.status}"=="Completed">selected</#if>>Completed</option>
                         </select>
                     </div>

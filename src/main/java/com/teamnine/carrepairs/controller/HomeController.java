@@ -7,11 +7,14 @@ import com.teamnine.carrepairs.model.SearchRepairByDate;
 import com.teamnine.carrepairs.service.RepairService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -28,15 +31,18 @@ public class HomeController {
     private static final String SEARCH_REPAIR = "searchForm";
 
     List<Repair> repairs;
+    private static final String DELETE_EXCEPTION ="delete";
+    private List<Repair> repairs;
 
     @Autowired
     private RepairService repairService;
 
 
-
     @RequestMapping(value= "/admin/home", method = RequestMethod.GET)
-    public String repairs(Model model){
-
+    public String repairs(Model model, @ModelAttribute(DELETE_EXCEPTION) String exception){
+        if (exception != null) {
+            model.addAttribute(DELETE_EXCEPTION,exception);
+        }
         model.addAttribute("repairs",repairService.findAllRepairs());
         model.addAttribute(SEARCH_REPAIR_BY_DATE,new SearchRepairByDate());
         model.addAttribute(SEARCH_REPAIR,new SearchFormRepair());
@@ -55,7 +61,6 @@ public class HomeController {
 
         return "home";
     }
-
 
 
     private static Date toDate(String text){

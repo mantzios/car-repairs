@@ -10,10 +10,12 @@ import com.teamnine.carrepairs.model.VehicleForm;
 import com.teamnine.carrepairs.service.VehicleService;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -27,13 +29,17 @@ public class VehicleController {
     private static final String SEARCH_VEHICLE="searchVehicle";
     private static final String ERROR_VEHICLE="error";
     private static final String ERROR_USER="errorUser";
+    private static final String DELETE_EXCEPTION ="delete" ;
 
     @Autowired
     private VehicleService vehicleService;
 
     List<Vehicle> vehicles;
     @RequestMapping(value = "/admin/vehicles",method = RequestMethod.GET)
-    public String vehicleHome(Model model){
+    public String vehicleHome(Model model,@ModelAttribute(DELETE_EXCEPTION) String exception){
+        if (model != null) {
+            model.addAttribute(DELETE_EXCEPTION,exception);
+        }
         model.addAttribute(VEHICLE_LIST,vehicleService.findAll());
         model.addAttribute(SEARCH_VEHICLE,new SearchForm());
 
@@ -125,4 +131,10 @@ public class VehicleController {
         return "vehicleForm";
     }
 
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    public String DeleteException(Model model, RedirectAttributes redirectAttributes){
+        //model.addAttribute(DELETE_EXCEPTION,"You cannot delete this user ");
+        redirectAttributes.addFlashAttribute(DELETE_EXCEPTION,"You cannot delete this vehicle");
+        return "redirect:/admin/owners";
+    }
 }

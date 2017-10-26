@@ -2,14 +2,14 @@ package com.teamnine.carrepairs.model;
 
 public class SearchFormRepair {
 
-    private long afm;
+    private String afm;
     private String vehiclePlate;
 
-    public long getAfm() {
+    public String getAfm() {
         return afm;
     }
 
-    public void setAfm(long afm) {
+    public void setAfm(String afm) {
         this.afm = afm;
     }
 

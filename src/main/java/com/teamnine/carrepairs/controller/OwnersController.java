@@ -8,10 +8,12 @@ import com.teamnine.carrepairs.model.OwnerForm;
 import com.teamnine.carrepairs.model.SearchForm;
 import com.teamnine.carrepairs.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.*;
@@ -22,7 +24,7 @@ public class OwnersController {
 
     @Autowired
     private AccountService accountService;
-
+    private static final String DELETE_EXCEPTION = "delete";
     private static final String OWNERS_LIST = "owners";
     private static final String USER_EXCEPTION="error";
     private static final String OWNER_FORM = "ownerForm";
@@ -37,7 +39,10 @@ public class OwnersController {
     }
 
     @RequestMapping(value = "/admin/owners", method = RequestMethod.GET)
-    public String owners(Model model) {
+    public String owners(Model model,@ModelAttribute(DELETE_EXCEPTION) String exception) {
+        if (exception!=null){
+            model.addAttribute(DELETE_EXCEPTION,exception);
+        }
         model.addAttribute(SEARCH_OWNER, new SearchForm());
         model.addAttribute(OWNERS_LIST, accountService.findAllOwners());
         return "owners";
@@ -103,7 +108,7 @@ public class OwnersController {
         else if (Utilities.isAfm(searchText)) {
         ownerForms = accountService.searchOwnerByAfm(Long.parseLong(searchText));
             if (ownerForms.isEmpty()) {
-            message="Owner with vat num: ".concat(searchText).concat("not found. ");
+            message="Owner with vat num: ".concat(searchText).concat(" not found. ");
              }
          }
         else {message="Please give a valid VAT num or Email ";}
@@ -120,6 +125,13 @@ public class OwnersController {
     public String UserException(Model model){
         model.addAttribute(USER_EXCEPTION,"User not found");
         return "editOwner";
+    }
+
+    @ExceptionHandler(EmptyResultDataAccessException.class)
+    public String DeleteException(Model model, RedirectAttributes redirectAttributes){
+        //model.addAttribute(DELETE_EXCEPTION,"You cannot delete this user ");
+        redirectAttributes.addFlashAttribute(DELETE_EXCEPTION,"You cannot delete this user");
+        return "redirect:/admin/owners";
     }
 }
 

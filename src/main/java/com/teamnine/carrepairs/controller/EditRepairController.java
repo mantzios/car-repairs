@@ -50,7 +50,6 @@ public class EditRepairController {
         repair.setId(id);
         Repair temp = repairService.findById(id);
         System.out.println();
-        //repair.setDatetime(new Date());
         repair.setOwner(temp.getOwner());
         repair.setVehicle(temp.getVehicle());
         repairService.updateRepair(repair);

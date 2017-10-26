@@ -40,9 +40,8 @@ public class CreateRepairForm {
     private String id_repair;
 
     public CreateRepairForm() {
+        setStatus("Pending");
     }
-
-
 
     public String getDatetime() {
         return datetime;

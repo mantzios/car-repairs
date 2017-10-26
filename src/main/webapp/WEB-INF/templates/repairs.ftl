@@ -43,7 +43,7 @@
                 </div>
                 <div class="col-sm-12">
                     <small  class="text-danger">
-                        <#list spring.status.errorMessages as error>${error}</#list>
+                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
                     </small>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-sm-12">
                     <small  class="text-danger">
-                        <#list spring.status.errorMessages as error>${error}</#list>
+                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
                     </small>
                 </div>
             </div>
@@ -76,15 +76,14 @@
             <div class="col-md-4 selectContainer">
                 <div class="col-md-12 input-group">
                     <select name="status" id="status" class="form-control selectpicker">
-                        <option value= "" >Select status</option>
-                        <option>New</option>
+                        <option selected >Pending</option>
                         <option>In Progress</option>
                         <option >Completed</option>
                     </select>
                 </div>
                 <div class="col-sm-12">
                     <small  class="text-danger">
-                        <#list spring.status.errorMessages as error>${error}</#list>
+                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
                     </small>
                 </div>
 
@@ -101,7 +100,7 @@
                 </div>
                 <div class="col-sm-12">
                     <small  class="text-danger">
-                        <#list spring.status.errorMessages as error>${error}</#list>
+                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
                     </small>
                 </div>
 
@@ -117,7 +116,7 @@
                 </div>
                 <div class="col-sm-12">
                     <small  class="text-danger">
-                        <#list spring.status.errorMessages as error>${error}</#list>
+                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
                     </small>
                 </div>
             </div>
@@ -133,7 +132,7 @@
                 </div>
                 <div class="col-sm-12">
                     <small  class="text-danger">
-                        <#list spring.status.errorMessages as error>${error}</#list>
+                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
                     </small>
                 </div>
 
@@ -149,7 +148,7 @@
                 </div>
                 <div class="col-sm-12">
                     <small  class="text-danger">
-                        <#list spring.status.errorMessages as error>${error}</#list>
+                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
                     </small>
                 </div>
             </div>
@@ -164,7 +163,7 @@
                 </div>
                 <div class="col-sm-12">
                     <small  class="text-danger">
-                        <#list spring.status.errorMessages as error>${error}</#list>
+                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
                     </small>
                 </div>
 

@@ -12,6 +12,7 @@ import com.teamnine.carrepairs.service.AccountService;
 import com.teamnine.carrepairs.service.RepairService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,6 +33,7 @@ public class RepairsController {
     private static final String SEARCH_REPAIR = "searchForm";
     private static final String LIST_REPAIRS = "repairs";
     private static final String DELETE_EXCEPTION = "delete" ;
+
     private Set<Repair> repairSet;
 
     @Autowired
@@ -97,9 +99,6 @@ public class RepairsController {
             // call service to search  by vehicle plate
             repairSet.addAll(repairService.searchByVehiclePlate(searchFormRepair.getVehiclePlate()));
         }
-        /*
-        repairSet.addAll(repairService.searchByDate(new Date(),calendar.getTime()));
-        */
         repairService.searchByDate(new Date());
         model.addAttribute(LIST_REPAIRS, repairSet);
         return "home";

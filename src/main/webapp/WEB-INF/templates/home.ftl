@@ -10,13 +10,19 @@
  </head>
 <body>
 
-<div class="container">
-
-<p><div><button type="button" style="margin:10px"  class="btn btn-warning pull-right" id="createBtn" onClick="location.href='/admin/repairs'" >Add New Repair</button>
-</div></p>
+<<div class="container">
+ <div class="row">
+ <div><button type="button" style="margin:10px"  class="btn btn-warning pull-right" id="createBtn" onClick="location.href='/admin/repairs'" ><i class="fa fa-plus"></i> Add New Repair</button>
+ </div>
+ </div>
 
 <h4 style=" font-weight: bold; font-size: 20px;">${message!""}</h4>
     <h3>${delete!""}</h3>
+
+   </div>
+
+
+<div class="container">
 <div class="row">
 
 
@@ -57,6 +63,7 @@
 </div>
 </div>
 <div class="container">
+<div class="row">
 <form class="form-inline pull-right" action="/admin/home/search" method="get" id="searchRepairByDate" name="searchRepairByDate">
  <@spring.bind "searchRepairByDate.dateStart"/>
             <div class="form-group ">
@@ -66,28 +73,35 @@
                             <i class="fa fa-calendar">
                             </i>
                         </div>
-                        <input class="form-control" id="dateStart" name="dateStart" type="date"/>
+                        <input class="form-control" id="dateStart" name="dateStart" type="text" onfocus="(this.type='date')" onblur="(this.type='text')"  placeholder="Date from"/>
 
                 </div>
 
             </div>
+             <@spring.bind "searchRepairByDate.dateEnd"/>
             <div class="form-group">
-                <@spring.bind "searchRepairByDate.dateEnd"/>
-                <div class="col-md-1">
-                    <div class="col-md-12 input-group">
 
-                        <input class="form-control" id="dateEnd" name="dateEnd"  type="date"/>
+
+                    <div class="col-md-12 input-group">
+                    <div class="input-group-addon">
+                                                <i class="fa fa-calendar">
+                                                </i>
+                                            </div>
+
+                        <input class="form-control" id="dateEnd" name="dateEnd"  type="text" onfocus="(this.type='date')" onblur="(this.type='text')"placeholder="Date to"/>
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-default pull-right "><i class="fa fa-search"></i></button>
                          </span>
                     </div>
-                </div>
+
                 <#list spring.status.errorMessages as error>
                 <span>${error}</span>
                 </#list>
             </div>
 
         </form>
+</div>
+</div>
 </div>
 <div class="container" style="margin-top:50px">
 

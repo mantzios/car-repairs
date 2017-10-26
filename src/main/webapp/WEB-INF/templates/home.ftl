@@ -118,7 +118,7 @@
            <td>${item.vehicle.plate}</td>
            <td>${item.owner.lastname!""}</td>
            <td><a href="/admin/edit/repair?id=${item.id}"><image src="/edit.png" class=" "/></a></td>
-           <td><a href="/admin/repairs/delete/${item.id}" m><image src="/delete.png" class=" "/></a></td>
+           <td><a href="/admin/repairs/delete/${item.id}" id="delete"><image src="/delete.png" class=" "/></a></td>
 
        </tr>
        </#list>

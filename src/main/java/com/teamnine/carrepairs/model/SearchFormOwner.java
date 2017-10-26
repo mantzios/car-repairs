@@ -1,6 +1,9 @@
 package com.teamnine.carrepairs.model;
 
 public class SearchFormOwner {
+
+
+
     private String email;
     private String afm;
 

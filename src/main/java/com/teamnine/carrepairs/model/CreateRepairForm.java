@@ -8,14 +8,14 @@ public class CreateRepairForm {
 
     private static final String COST="\\d+.*| \\.\\d+";
     private static final String AFM_NUMBER="\\d\\d\\d\\d\\d\\d\\d\\d\\d";
-    // private static final String STATUS="(?:New|In Progress..)";
+   // private static final String STATUS="(?:New|In Progress..)";
     private static final String PLATE="([A-Z])([A-Z])([A-Z])-\\d\\d\\d\\d";
 
     @NotEmpty(message = "{repair.datetime.empty}")
     private String datetime;
 
     @NotEmpty(message = "{repair.status.empty}")
-    // @Pattern(regexp = STATUS, message = "{repair.invalid.status}")
+   // @Pattern(regexp = STATUS, message = "{repair.invalid.status}")
     private String status;
 
     @NotEmpty(message = "{repair.type.empty}")
@@ -24,7 +24,6 @@ public class CreateRepairForm {
     @NotEmpty(message = "{repair.cost.empty}")
     @Pattern(regexp = COST, message = "{repair.invalid.cost}")
     private String cost;
-
 
     private String textarea;
     @NotEmpty(message = "{repair.time.empty}")

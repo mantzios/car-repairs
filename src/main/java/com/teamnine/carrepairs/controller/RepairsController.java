@@ -12,7 +12,6 @@ import com.teamnine.carrepairs.service.AccountService;
 import com.teamnine.carrepairs.service.RepairService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -47,7 +46,9 @@ public class RepairsController {
 
     @RequestMapping(value = "/admin/repairs", method = RequestMethod.GET)
     public String register(Model model) {
-        model.addAttribute(CREATE_FORM, new CreateRepairForm());
+        CreateRepairForm createRepairForm = new CreateRepairForm();
+        createRepairForm.setStatus("");
+        model.addAttribute(CREATE_FORM, createRepairForm );
         return "repairs";
 
     }

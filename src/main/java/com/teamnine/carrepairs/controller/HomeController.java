@@ -2,6 +2,7 @@ package com.teamnine.carrepairs.controller;
 
 
 import com.teamnine.carrepairs.domain.Repair;
+import com.teamnine.carrepairs.model.SearchFormRepair;
 import com.teamnine.carrepairs.model.SearchRepairByDate;
 import com.teamnine.carrepairs.service.RepairService;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,9 @@ public class HomeController {
 
     private  final static org.slf4j.Logger logger = LoggerFactory.getLogger(HomeController.class);
     private static final String SEARCH_REPAIR_BY_DATE = "searchRepairByDate";
+    private static final String SEARCH_REPAIR = "searchForm";
+
+    List<Repair> repairs;
     private static final String DELETE_EXCEPTION ="delete";
     private List<Repair> repairs;
 
@@ -41,6 +45,7 @@ public class HomeController {
         }
         model.addAttribute("repairs",repairService.findAllRepairs());
         model.addAttribute(SEARCH_REPAIR_BY_DATE,new SearchRepairByDate());
+        model.addAttribute(SEARCH_REPAIR,new SearchFormRepair());
 
         return "home";
     }

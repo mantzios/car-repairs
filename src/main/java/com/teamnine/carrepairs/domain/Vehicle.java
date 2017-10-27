@@ -13,13 +13,13 @@ public class Vehicle {
     @Column(name = "vehicle_id")
     private Long id;
 
-    @Column
+    @Column(unique = true)
     private String plate;
 
-    @Column
+    @Column(nullable = false)
     private String model;
 
-    @Column
+    @Column(nullable = false)
     private String year;
 
     @Column

@@ -217,11 +217,13 @@
                 url: "/admin/api/plate/".concat(url),
                 success: function() {
                     document.getElementById("plate_num").style.borderColor = "green";
+                    document.getElementById("plate_num").style.backgroundColor="#CCFFCC"
                     var resetBtn = document.getElementById("btn");
                     resetBtn.disabled = false;
                 },
                 error: function(){
                     document.getElementById("plate_num").style.borderColor = "red";
+                    document.getElementById("plate_num").style.backgroundColor = "#FFCBCB";
                     var resetBtn = document.getElementById("btn");
                     resetBtn.disabled = true;
                 }
@@ -237,12 +239,14 @@
             type: "GET",
             url: "/admin/api/afm/".concat(url),
             success: function() {
+                document.getElementById("afm").style.backgroundColor="#CCFFCC"
                 document.getElementById("afm").style.borderColor = "green";
                 var resetBtn = document.getElementById("btn");
                 resetBtn.disabled = false;
             },
             error: function(){
                 document.getElementById("afm").style.borderColor = "red";
+                document.getElementById("afm").style.backgroundColor = "#FFCBCB";
                 var resetBtn = document.getElementById("btn");
                 resetBtn.disabled = true;
             }

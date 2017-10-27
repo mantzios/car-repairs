@@ -34,9 +34,11 @@
                 <div class="col-md-12 input-group">
                     <input  name="plate" id="plate"  placeholder="Vehicle Plate" class="form-control"  type="text">
                 </div>
-                <#list spring.status.errorMessages as error>
-                    <h5>${error}</h5>
-                </#list>
+                <div class="col-sm-12">
+                                                    <small  class="text-danger">
+                                                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
+                                                    </small>
+                                                </div>
             </div>
         </div>
 
@@ -48,9 +50,11 @@
                 <div class="col-md-12 input-group">
                     <input  name="model" id="model"  placeholder="Model" class="form-control"  type="text">
                 </div>
-                <#list spring.status.errorMessages as error>
-                    <h5>${error}</h5>
-                </#list>
+                <div class="col-sm-12">
+                                                    <small  class="text-danger">
+                                                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
+                                                    </small>
+                                                </div>
             </div>
         </div>
 
@@ -61,9 +65,11 @@
                 <div class="col-md-12 input-group">
                     <input  name="color" id="color" placeholder="Color"  class="form-control"  type="text">
                 </div>
-                <#list spring.status.errorMessages as error>
-                    <h5>${error}</h5>
-                </#list>
+                <div class="col-sm-12">
+                                                    <small  class="text-danger">
+                                                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
+                                                    </small>
+                                                </div>
             </div>
         </div>
 
@@ -74,9 +80,11 @@
                 <div class="col-md-12 input-group ">
                     <input name="year" id="year" placeholder="Year"  class="form-control"  type="text">
                 </div>
-                <#list spring.status.errorMessages as error>
-                    <h5>${error}</h5>
-                </#list>
+                <div class="col-sm-12">
+                                                    <small  class="text-danger">
+                                                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
+                                                    </small>
+                                                </div>
             </div>
         </div>
 
@@ -87,9 +95,11 @@
                 <div class="col-md-12 input-group ">
                     <input name="ownerAfm" id="afm" placeholder="Owner's Afm"  class="form-control"  type="text">
                 </div>
-                <#list spring.status.errorMessages as error>
-                    <h5>${error}</h5>
-                </#list>
+                <div class="col-sm-12">
+                                                    <small  class="text-danger">
+                                                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
+                                                    </small>
+                                                </div>
 
             </div>
         </div>

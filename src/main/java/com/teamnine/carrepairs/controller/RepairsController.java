@@ -49,7 +49,6 @@ public class RepairsController {
     @RequestMapping(value = "/admin/repairs", method = RequestMethod.GET)
     public String register(Model model) {
         CreateRepairForm createRepairForm = new CreateRepairForm();
-        createRepairForm.setStatus("");
         model.addAttribute(CREATE_FORM, createRepairForm );
         return "repairs";
 

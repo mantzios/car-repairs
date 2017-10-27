@@ -20,11 +20,10 @@
 <body>
  <div class="container">
     <h3 style="color: green; font-weight: bold; font-size: 20px;">${error!""}</h3>
-     <#if error??>
-     <#else>
+
         <form class="well form-horizontal" action="/admin/edit/repair?id=${repair.id_repair}" method="post" id="editRepairForm" name="editRepairForm">
             <div class="form-group">
-                <@spring.bind "editRepairForm.datetime"/>
+                <@spring.bind "repair.datetime"/>
                 <label class="control-label col-md-4 requiredField" for="date">Date</label>
                 <div class="col-md-4">
                     <div class="col-md-12 input-group">
@@ -35,14 +34,18 @@
                         <input class="form-control" id="datetime" name="datetime" placeholder="select date.." type="text"/>
                     </div>
                 </div>
-                <#list spring.status.errorMessages as error>
-                <span>${error}</span>
-                </#list>
+                 <div class="col-sm-12">
+                                    <small  class="text-danger">
+                                        <#list spring.status.errorMessages as error>
+                                            <div>${error}</div>
+                                        </#list>
+                                    </small>
+                                </div>
             </div>
 
 
              <div class="form-group">
-                            <@spring.bind "editRepairForm.time"/>
+                            <@spring.bind "repair.time"/>
                             <label class="control-label col-md-4 ">Time</label>
                             <div class="col-md-4">
                                 <div class="col-md-12 input-group clockpicker">
@@ -53,15 +56,19 @@
                                         <input type="text" class="form-control" id="time" name="time" placeholder="select time..">
                                 </div>
                             </div>
-                            <#list spring.status.errorMessages as error>
-                            <span>${error}</span>
-                            </#list>
+                             <div class="col-sm-12">
+                                                <small  class="text-danger">
+                                                    <#list spring.status.errorMessages as error>
+                                                        <div>${error}</div>
+                                                    </#list>
+                                                </small>
+                                            </div>
             </div>
 
 
 
             <div class="form-group">
-                <@spring.bind "editRepairForm.status"/>
+                <@spring.bind "repair.status"/>
                 <label class="col-md-4 control-label">Status</label>
                 <div class="col-md-4 selectContainer">
                     <div class="col-md-12 input-group">
@@ -71,55 +78,65 @@
                             <option <#if "${repair.status}"=="Completed">selected</#if>>Completed</option>
                         </select>
                     </div>
-                    <#list spring.status.errorMessages as error>
-                    <span>${error}</span>
-                    </#list>
+
                 </div>
             </div>
             <div class="form-group">
-                <@spring.bind "editRepairForm.cost"/>
+                <@spring.bind "repair.cost"/>
                 <label class="col-md-4 control-label">Cost</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="col-md-12 input-group">
                         <input  name="cost" id="cost" placeholder="Cost" class="form-control"  type="text">
                     </div>
-                    <#list spring.status.errorMessages as error>
-                     <span>${error}</span>
-                    </#list>
+                     <div class="col-sm-12">
+                                        <small  class="text-danger">
+                                            <#list spring.status.errorMessages as error>
+                                                <div>${error}</div>
+                                            </#list>
+                                        </small>
+                                    </div>
                 </div>
             </div>
             <div class="form-group">
-                <@spring.bind "editRepairForm.type"/>
+                <@spring.bind "repair.type"/>
                 <label class="col-md-4 control-label">Type</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="col-md-12 input-group ">
                         <input  name="type" id="type" placeholder="Type" class="form-control"  type="text">
                      </div>
-                    <#list spring.status.errorMessages as error>
-                    <span>${error}</span>
-                    </#list>
+                     <div class="col-sm-12">
+                                        <small  class="text-danger">
+                                            <#list spring.status.errorMessages as error>
+                                                <div>${error}</div>
+                                            </#list>
+                                        </small>
+                                    </div>
                 </div>
             </div>
             <div class="form-group">
-                <@spring.bind "editRepairForm.textarea"/>
+                <@spring.bind "repair.textarea"/>
                 <label class="col-md-4 control-label">Comments</label>
                 <div class="col-md-4 inputGroupContainer">
                     <div class="col-md-12 input-group">
                         <textarea  class="form-control col-md-12" rows="5" name="textarea" id="textarea" placeholder="Add your comment here.."></textarea>
                     </div>
-                     <#list spring.status.errorMessages as error>
-                        <span>${error}</span>
-                     </#list>
+                      <div class="col-sm-12">
+                                         <small  class="text-danger">
+                                             <#list spring.status.errorMessages as error>
+                                                 <div>${error}</div>
+                                             </#list>
+                                         </small>
+                                     </div>
                 </div>
             </div>
             <div class="form-group">
             <label class="col-md-4 control-label"></label>
                 <div class="col-md-4"><br>
-                    <button type="submit" class="btn pull-right btn-warning" >Edit Repair</button>
+                    <button type="submit" class="btn pull-right btn-warning" >Save Changes</button>
                 </div>
             </div>
         </form>
-     </#if>
+
     </div>
  </div><!-- /.container -->
 

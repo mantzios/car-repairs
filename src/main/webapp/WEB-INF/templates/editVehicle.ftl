@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<@layout flag="repairs">
+<@layout flag="vehicles">
     <#import "/spring.ftl" as spring/>
 <head>
 
@@ -37,9 +37,11 @@
                 <div class="col-md-12 input-group">
                     <input  name="plate" id="plate" value="${vehicleForm.plate!""}" placeholder="Vehicle Plate" class="form-control"  type="text">
                 </div>
-                <#list spring.status.errorMessages as error>
-                    <h5>${error}</h5>
-                </#list>
+                <div class="col-sm-12">
+                                                    <small  class="text-danger">
+                                                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
+                                                    </small>
+                                                </div>
             </div>
         </div>
 
@@ -51,9 +53,11 @@
                 <div class="col-md-12 input-group">
                     <input  name="model" id="model" value="${vehicleForm.model!""}" placeholder="Model" class="form-control"  type="text">
                 </div>
-                <#list spring.status.errorMessages as error>
-                    <h5>${error}</h5>
-                </#list>
+                <div class="col-sm-12">
+                                                    <small  class="text-danger">
+                                                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
+                                                    </small>
+                                                </div>
             </div>
         </div>
 
@@ -64,9 +68,11 @@
                 <div class="col-md-12 input-group">
                     <input  name="color" id="color" value="${vehicleForm.color!""}" placeholder="Color"  class="form-control"  type="text">
                 </div>
-                <#list spring.status.errorMessages as error>
-                    <h5>${error}</h5>
-                </#list>
+                <div class="col-sm-12">
+                                                    <small  class="text-danger">
+                                                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
+                                                    </small>
+                                                </div>
             </div>
         </div>
 
@@ -77,9 +83,11 @@
                 <div class="col-md-12 input-group ">
                     <input name="year" id="year" placeholder="Year" value="${vehicleForm.year!""}" class="form-control"  type="text">
                 </div>
-                <#list spring.status.errorMessages as error>
-                    <h5>${error}</h5>
-                </#list>
+                <div class="col-sm-12">
+                                                    <small  class="text-danger">
+                                                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
+                                                    </small>
+                                                </div>
             </div>
         </div>
 
@@ -90,16 +98,18 @@
                 <div class="col-md-12 input-group ">
                     <input name="ownerAfm" id="afm" value="${vehicleForm.ownerAfm!"123456789"}" placeholder="Year" hidden="hidden" class="form-control"  type="text">
                 </div>
-                <#list spring.status.errorMessages as error>
-                    <h5>${error}</h5>
-                </#list>
+               <div class="col-sm-12">
+                                                   <small  class="text-danger">
+                                                       <#list spring.status.errorMessages as error><div>${error}</div></#list>
+                                                   </small>
+                                               </div>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-md-4 control-label"></label>
             <div class="col-md-4"><br>
-                <button type="submit" class="btn pull-right btn-warning" id="btn">Add Vehicle</button>
+                <button type="submit" class="btn pull-right btn-warning" id="btn">Save Changes</button>
             </div>
         </div>
 

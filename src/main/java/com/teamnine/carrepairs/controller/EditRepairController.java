@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -19,7 +20,7 @@ import javax.validation.Valid;
 public class EditRepairController {
 
     private final static org.slf4j.Logger logger = LoggerFactory.getLogger(HomeController.class);
-    private static final String FORM = "editRepairForm";
+    private static final String FORM = "repair";
 
     private static final String ERROR="error";
 
@@ -33,8 +34,8 @@ public class EditRepairController {
 
         EditRepairForm editRepairForm = RepToFormConverter.buildFormObject(repairService.findById(id));
 
-        model.addAttribute(FORM, new EditRepairForm());
-        model.addAttribute("repair", editRepairForm);
+
+        model.addAttribute(FORM, editRepairForm);
 
         return "editRepair";
 
@@ -42,10 +43,15 @@ public class EditRepairController {
 
 
     @RequestMapping(value = "/admin/edit/repair", method = RequestMethod.POST)
-    public String register(@Valid @ModelAttribute(FORM) EditRepairForm editRepairForm,
+    public String register(@Valid @ModelAttribute(FORM) EditRepairForm editRepairForm,BindingResult bindingResult,
                            Model model,
                            @RequestParam(name = "id", required = true) long id) throws RepairNotFoundException {
 
+       if (bindingResult.hasErrors()) {
+           editRepairForm.setId_repair(Long.toString(id));
+           model.addAttribute(FORM, editRepairForm);
+            return "editRepair";
+        }
         Repair repair = RepairConverterEdit.buildRepairObject(editRepairForm);
         repair.setId(id);
         Repair temp = repairService.findById(id);

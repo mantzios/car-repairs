@@ -64,8 +64,10 @@
 </div>
 <div class="container">
 <div class="row">
+
 <form class="form-inline pull-right" action="/admin/home/search" method="get" id="searchRepairByDate" name="searchRepairByDate">
  <@spring.bind "searchRepairByDate.dateStart"/>
+
             <div class="form-group ">
 
                     <div class="col-md-12 input-group">
@@ -77,7 +79,9 @@
 
                 </div>
 
+
             </div>
+
              <@spring.bind "searchRepairByDate.dateEnd"/>
             <div class="form-group">
 
@@ -94,12 +98,12 @@
                          </span>
                     </div>
 
-                <#list spring.status.errorMessages as error>
-                <span>${error}</span>
-                </#list>
+
             </div>
 
+
         </form>
+
 </div>
 </div>
 </div>

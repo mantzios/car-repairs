@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -50,9 +52,14 @@ public class HomeController {
     }
 
     @RequestMapping(value= "/admin/home/search", method = RequestMethod.GET)
-    public String searchByDate(Model model,@ModelAttribute(SEARCH_REPAIR_BY_DATE) SearchRepairByDate searchRepairByDate){
+    public String searchByDate(Model model, @Valid @ModelAttribute(SEARCH_REPAIR_BY_DATE) SearchRepairByDate searchRepairByDate, BindingResult bindingResult){
 
-
+        if (bindingResult.hasErrors()) {
+            model.addAttribute(SEARCH_REPAIR_BY_DATE, searchRepairByDate);
+            model.addAttribute("repairs",repairService.findAllRepairs());
+            model.addAttribute(SEARCH_REPAIR,new SearchFormRepair());
+            return "home";
+        }
         repairs= repairService.searchByDate(toDate(searchRepairByDate.getDateStart()),toDate(searchRepairByDate.getDateEnd()));
 
         model.addAttribute("repairs",repairs);

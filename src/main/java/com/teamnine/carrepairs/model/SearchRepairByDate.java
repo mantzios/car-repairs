@@ -1,9 +1,12 @@
 package com.teamnine.carrepairs.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class SearchRepairByDate {
 
-
+    @NotEmpty(message = "{search.date.empty}")
     private String dateStart;
+    @NotEmpty(message = "{search.date.empty}")
     private String dateEnd;
 
     public String getDateStart() {

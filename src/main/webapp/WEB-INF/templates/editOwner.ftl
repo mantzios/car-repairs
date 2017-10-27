@@ -38,9 +38,11 @@
                 <div class="col-md-12 input-group">
                     <input  name="firstName" id="firstName" value="${ownerForm.firstName!""}" placeholder="First Name" class="form-control"  type="text">
                 </div>
-                <#list spring.status.errorMessages as error>
-                    <h5>${error}</h5>
-                </#list>
+                <div class="col-sm-12">
+                                                    <small  class="text-danger">
+                                                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
+                                                    </small>
+                                                </div>
             </div>
         </div>
 
@@ -52,9 +54,11 @@
                 <div class="col-md-12 input-group">
                     <input  name="lastName" id="lastName" value="${ownerForm.lastName!""}" placeholder="Last Name" class="form-control"  type="text">
                 </div>
-                <#list spring.status.errorMessages as error>
-                    <h5>${error}</h5>
-                </#list>
+                <div class="col-sm-12">
+                                                    <small  class="text-danger">
+                                                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
+                                                    </small>
+                                                </div>
             </div>
         </div>
 
@@ -65,10 +69,11 @@
                 <div class="col-md-12 input-group">
                     <input  name="afm" id="afm" placeholder="afm" value="${ownerForm.afm}" class="form-control"  type="text">
                 </div>
-                <#list spring.status.errorMessages as error>
-                    <h5>${error}</h5>
-                </#list>
-            </div>
+                <div class="col-sm-12">
+                                                    <small  class="text-danger">
+                                                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
+                                                    </small>
+                                                </div>
         </div>
 
         <div class="form-group">
@@ -78,9 +83,11 @@
                 <div class="col-md-12 input-group ">
                     <input name="access" id="access" placeholder="Access" value="${ownerForm.access}" class="form-control"  type="text">
                 </div>
-                <#list spring.status.errorMessages as error>
-                    <h5>${error}</h5>
-                </#list>
+                <div class="col-sm-12">
+                                                    <small  class="text-danger">
+                                                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
+                                                    </small>
+                                                </div>
             </div>
         </div>
 
@@ -104,16 +111,18 @@
                 <div class="col-md-12 input-group ">
                     <input name="password" id="password" placeholder="Password" value="${ownerForm.password!""}" class="form-control"  type="password">
                 </div>
-                <#list spring.status.errorMessages as error>
-                    <h5>${error}</h5>
-                </#list>
+                <div class="col-sm-12">
+                                                    <small  class="text-danger">
+                                                        <#list spring.status.errorMessages as error><div>${error}</div></#list>
+                                                    </small>
+                                                </div>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-md-4 control-label"></label>
             <div class="col-md-4"><br>
-                <button type="submit" class="btn pull-right btn-warning" >Add Repair</button>
+                <button type="submit" class="btn pull-right btn-warning" >Save Changes</button>
             </div>
         </div>
 
